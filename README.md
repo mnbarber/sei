@@ -1,6 +1,6 @@
 <img src="https://i.imgur.com/XseXU8J.png" width="900">
 
-# Welcome to General Assembly SEI-9-25 - You Amazing Folks!
+# Welcome to General Assembly SEI-1-22-WC - You Amazing Folks!
 
 This will be your shared class repo! Guides, in-class labs and code samples, and other resources will live here.
 
@@ -19,8 +19,8 @@ This will be your shared class repo! Guides, in-class labs and code samples, and
 
 ### Course Dates
 
-- Course duration: Sept 25th - Dec 21th
-- Holidays - 11/10, 11/22-24
+- Course duration: Jan 22th - April 17th
+- Holidays - 2/19, 3/29, 4/1
 
 
 
@@ -109,18 +109,18 @@ This will be your shared class repo! Guides, in-class labs and code samples, and
 ### Teaching Assistants
 
 |Instructor Assitant| William Long | @William Long
-TA hours are 5:30PM - 8:30PM ET Mon - Thurs, Sunday TBD
+TA OFFICE HOURS: 
+- Monday to Thursday: 5:30 PM - 8:30 PM PST  
+- Sunday: 12:00 PM - 3:00 PM PST
 
 
 
 ### Link to Recorded Lessons
 
 For your convenience, recordings of the lessons will be available to review at 
- [YouTube]().
- 
- 
+  
 
-### Daily Schedule (ET)
+### Daily Schedule (PT)
 
 Typical schedule, subject to change
 
@@ -139,8 +139,6 @@ Unless otherwise stated, no deliverable will be accepted past its due date, whic
 
 Graduation requires that 80% of deliverables be completed (working) and delivered on time.
 
-
-[Link to submit Deliverables]()
 
 
 ### Additional Coding Practice Resources
