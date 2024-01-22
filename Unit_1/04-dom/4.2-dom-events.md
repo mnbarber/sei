@@ -1,0 +1,396 @@
+<img src="https://i.imgur.com/VLwvpbl.jpg" width="900">
+
+## Learning Objectives
+
+| Students will be able to: |
+|---|
+| Add event listeners for events such as `click` |
+| Explore the event object |
+| Explain event bubbling |
+| Use event bubbling to implement event delegation |
+| Stop an event from bubbling |
+
+## Road Map
+
+1. Setup
+2. What are DOM events?
+3. What's an Event Listener?
+4. Our first Event Listener
+5. The Event Object
+6. Adding a New Comment
+7. Event Bubbling
+8. Event Delegation
+9. Removing Event Listeners
+10. Essential Questions
+11. Further Study
+
+## 1. Setup
+
+Once again, we will use an actual project structure instead of working within Replit.
+
+### Create the Project Files
+
+1. Move in your `code` folder/directory: `cd ~/code`
+2. Create a new directory named `dom-events`:  `mkdir dom-events`
+3. Move into the new directory: `cd dom-events`
+4. Create an `index.html` file:  `touch index.html`
+5. Open the directory in VS Code: `code .`
+6. Open `index.html` in the editor and use `! [tab]` to create the HTML boilerplate
+7. Create a `js` directory and touch a `js/main.js` file
+8. Add a `<script>` tag to include `main.js` in the `<head>`:
+
+	```html
+	<head>
+	  ...
+	  <title>DOM Events</title>
+	  <script defer src="js/main.js"></script>
+	</head>
+	```
+	> The `defer` attribute ensures the DOM is ready before the script executes.
+9. Finally, let's add an `<h1>` inside of the `<body>` as follows:
+
+	```html
+	...
+	<body>
+	  <h1 id="title" class="main-title">DOM Events</h1>
+	  
+	</body>
+	</html>
+	```
+
+### View `index.html` in Live Server
+
+Click "Go Live" in the status bar at the bottom of VS Code.
+
+Live Server should automatically open `index.html` in a new browser tab:
+
+## 2. What are DOM Events?
+
+DOM events are the bedrock of interactivity on web pages.
+
+DOM events enable us as developers to implement **event-driven programming**. This programming paradigm is such that much of our code runs in response to events being triggered during run-time (usually due to user interaction).
+
+Lots of events are being generated within the browser, for example, when:
+
+-  A user moves or clicks the mouse
+-  A user presses a key
+-  When a form is submitted
+-  When the page has finished loading or has been resized
+-  etc.
+
+Take a peek [here](https://developer.mozilla.org/en-US/docs/Web/Events) the sheer number of events.
+
+## 3. What's an Event Listener?
+
+An **event listener** is a function, more specifically, a **callback function**, that is called when an event fires.
+
+Event listeners may also be referred to as _event handlers_.
+
+### How Are Event Listeners Are Added to DOM Elements?
+
+The best practice approach to register an event listener is to use the [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) method.
+
+Here is the syntax for attaching an event listener for a given event:
+
+```js
+element.addEventListener(<event-name>, <callback>);
+```
+- **event-name** is the name of the event (string)
+- **callback** is the function we want executed when the event happens.  When called by the JS engine, it will be passed an _event object_ as an argument.
+
+## 4. Our first Event Listener
+
+### Add Additional HTML
+
+Let's add the following HTML to between the `<body>` tags in `index.html`:
+
+```html
+<h3>Comments</h3>
+<ul>
+  <li>SEI Rocks!</li>
+</ul>
+<input>
+<button>Add Comment</button>
+```
+
+### Listen to the `click` Event on the `<button>`
+
+We can add a `click` event listener to pretty much any element - not just buttons.  However, buttons are pre-styled to look and act clickable 😃
+
+We're going to use an anonymous callback function in this first example:
+
+```js
+// Select the button
+const btn = document.querySelector('button');
+btn.addEventListener('click', function(evt) {
+  // testing!
+  console.log(evt);  
+});
+``` 
+
+If all goes well, clicking the button should log out the **event object**.
+
+Congrats, attaching your first event listener!
+
+<details>
+<summary>
+❓ What's the name of the method used to attach event listeners to elements?
+</summary>
+<hr>
+
+**`addEventListener()`**
+
+<hr>
+</details>
+
+<details>
+<summary>
+❓ Name three events that might be triggered in the browser.
+</summary>
+<hr>
+
+**`click`, `submit`, `change`, `mousemove`, etc.**
+
+<hr>
+</details>
+
+## 5. The Event Object
+
+Examining the **event object** that was provided as an argument to our event listener reveals lots of useful information about the event!
+
+Of special interest are:
+
+- Several `...X` and `...Y` properties that provide where the click occurred.
+
+- The `target` property, which holds a reference to the DOM element that triggered (dispatched) the event.
+
+The `target` property will certainly be the one to remember as it will be used very often moving forward.
+
+## 6. Adding a New Comment
+
+### Application Logic
+
+When we click the `[Add Comment]` button, we'll need our event listener function to do the following:
+
+1. Create a new `<li>` element
+2. Set the `<li>` element's `innerText` to that of the text entered in the `<input>`
+3. Append the `<li>` to its parent, the `<ul>`
+4. Finally, clear the text from the `<input>`
+
+### Creating a New `<li>` Element
+
+If we want to add a new comment to the DOM, we're going to need to create a new `<li>` element.
+
+Here's how we can do it using the `document.createElement` method:
+
+```js
+btn.addEventListener('click', function(evt) {
+  // Create a new <li> element
+  const newCommentEl = document.createElement('li');
+  console.log(newCommentEl)
+});
+```
+> Note: At this point, the element is "in memory" only and is not part of the DOM (yet).
+
+Okay, we have a new `<li>` element created and assigned to a variable named `newCommentEl`, but it has no content...
+
+### Getting/Setting the Text of an `<input>`
+
+We'll need to access the text the user has typed into the `<input>` element in order to set the `innerText` of `newCommentEl`.
+
+Since `<input>` elements are **empty elements**, i.e., elements with no content, `innerText` and `innerHTML` properties do not exist.
+
+Instead, we get and set the text within an `<input>` using the `value` property.
+
+> NOTE: The `value` property maps to the `value` attribute in HTML.
+
+Because this app needs to access the `<input>` every time the `<button>` is clicked, it would be more efficient to cache (a developer term for 'remember' or 'store') the `<input>` outside of the event handler function so that it isn't selected over and over:
+
+```js
+// Cached elements
+const inputEl = document.querySelector('input');
+
+btn.addEventListener('click', function(evt) {
+  const newCommentEl = document.createElement('li');
+  // Access the input's text
+  const commentText = inputEl.value;
+  console.log(commentText)
+});
+```
+
+🤔 For future reference, remembering that we use the `value` property to get/set the text of an `<input>` element is worthwhile.
+
+### Setting the Content of the `<li>`
+
+So, now we can set the `innerText` of the new `<li>`:
+
+```js
+// Cached elements
+const inputEl = document.querySelector('input');
+
+btn.addEventListener('click', function(evt) {
+  const newCommentEl = document.createElement('li');
+  const commentText = inputEl.value;
+  // Set newComment's text
+  newCommentEl.innerText = commentText;
+});
+```
+
+Now the new `<li>` is ready to be added to the DOM...
+
+### Adding the `<li>` to the DOM
+
+<details>
+<summary>
+❓ Which element do we we want to add the <code>&lt;li&gt;</code> to?
+</summary>
+<hr>
+
+**The `<ul>`**
+
+<hr>
+</details>
+
+There are a few ways to add DOM elements to the document using JavaScript.
+
+One common way to add new elements to another element is by using the [append()](https://developer.mozilla.org/en-US/docs/Web/API/Element/append) method like this:
+
+```js
+// Cached elements
+const inputEl = document.querySelector('input');
+// Remember the <ul> too!
+const ulEl = document.querySelector('ul');
+
+btn.addEventListener('click', function(evt) {
+  const newCommentEl = document.createElement('li');
+  const commentText = inputEl.value;
+  newCommentEl.innerText = commentText;
+  // Add the new li as the ul's last child
+  ulEl.append(newCommentEl);
+});
+```
+
+Test it out - nice!
+
+### Clearing the Text in the `<input>`
+
+The new comment has been added, but if we want to improve the UX, we have one more task - clear out the `<input>`.
+
+### 👉 YOU DO: Improve the UX (1 min)
+
+- Clear the text in the `<input>` by adding one line of code.
+
+  > Hint: What's the property that we used to _get_ the text?
+
+## 7. Event Bubbling
+
+When an event occurs on an element, that event _bubbles_ up through the DOM, all the way up to the `document` object.
+
+<img src="https://i.imgur.com/B7f5PAZ.png" width="90%">
+
+All event listeners attached for the same event, such as `click`, will be invoked along the path to the `document` element - unless one of those listeners calls the **event object's** [stopPropagation()](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) method.
+
+How can our apps benefit from this event bubbling?  Let's see...
+
+## 8. Event Delegation
+
+### What is Event Delegation
+
+Imagine a web app, like a game perhaps, with lots of elements that need to respond to a click. It's possible there could be tens, hundreds or more of these elements.
+
+That would be a lot of event listeners, wouldn't it - not very efficient at all.
+
+Plus, every time a new element is added, an event listener would also have to be attached 🤢
+
+We can avoid this predicament by using a technique know as **event delegation**.
+
+Event delegation allows us to attach an event listener to a single DOM element that can respond to events triggered by any of its **descendant** DOM elements.  Much more efficient!
+
+### Implementing Event Delegation
+
+Let's attach an event listener (this time we'll use a named function) on the `<ul>` that can respond to clicks on any of its nested `<li>` elements:
+
+```js
+ulEl.addEventListener('click', handleClick);
+
+// Naming the function handleXxxxx is a great practice
+function handleClick(evt) {
+  console.log(evt.target);
+}
+```
+
+> Important:  The event object's `target` property will be set to the **actual** element that was clicked!
+
+Not only is event delegation more efficient, by it's very design, it's dynamic - as descendants are added, they too will be listened to!
+
+### 👉 YOU DO: Event Delegation (2 mins)
+
+Now that we have a delegated event listener in place, let's:
+
+- Write the code to change the color of the text of a clicked comment to a color of your choosing.
+
+  > Hint: DOM elements have a `style` property that's an object with the CSS properties (named using camel-casing), e.g., `someElement.style.fontSize`.
+
+## 9. Removing Event Listeners
+
+Although not usually necessary, it's possible to remove an event listener, but only if a named function was used as the callback.
+
+This is how we could detach the event listener from the `<button>`:
+
+```js
+btn.removeEventListener('click', handleClick);
+```
+
+## 10. ❓ Essential Questions
+
+<details>
+<summary>
+(1) What is the argument that JS passes to an event listener when it calls it?
+</summary>
+<hr>
+
+**The event object**
+
+<hr>
+</details>
+
+<details>
+<summary>
+(2) What is the name of the property available on the above argument that represents the DOM element that triggered/dispatched the event?
+</summary>
+<hr>
+
+**`target`**
+
+<hr>
+</details>
+
+<details>
+<summary>
+(3) Let's say we needed to have an event listener respond to a <code>click</code> event on the <code>&lt;td&gt;</code> elements within a <code>&lt;table&gt;</code> - would we have to add event listeners to each <code>&lt;td&gt;</code>?  Support your answer.
+</summary>
+<hr>
+
+**No. Thanks to Event Delegation we could add the event listener on either the `<tbody>` or `<table>` element**
+
+<hr>
+</details>
+
+## 11: Further Study
+
+### Less Useful Ways to Add Event Listeners
+
+In addition to the `addEventListener()` method, there are two other ways to register event listeners:
+
+- In the HTML (inline):<br>`<button id="reset-btn" onclick="reset()">`
+- Assigning to DOM elements' properties:<br>`resetBtn.onclick = reset;` 
+
+Using the HTML approach (`onclick="reset()"`) is typically frowned upon because it requires that the function be in the global scope. In addition, this, like inline styling, kind of breaks the **separation of concerns** design principle.
+
+The DOM element approach (`resetBtn.onclick = reset;`) is better because the function does not have to be in global scope.
+
+Note that the above two approaches are not the recommended best practice.
+
+## References
+
+- [Event Developer Guide on MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/Events)
