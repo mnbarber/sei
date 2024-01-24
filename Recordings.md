@@ -1,2 +1,5 @@
 1. Video 1 - Terminal Review, Video 2 - JS datatypes (thinking about variables) [recordings](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/Wto_fzgty-YjOz5FUiS3xQb0Hzak-0mvHmzV1-GbuCnossyuyNuWVgG3zdDh0uXB.C-XS3KxSesOWZ9xm__;!!GgcXpDZ2N9l6uyZJ!nLhS-M3PgIRV9OvaCI7mj62Hv73y-pK7pOZNMnknQrzz9Sv3wPCKkAhWe1XTSca0V30Hp5L3ouh6_9zgQQNiXGv__1M$)
 passcode - Lbn0a*#Q
+2. video 2 - File structure walkthrough [watch this a code along like 10 times](https://generalassembly.zoom.us/rec/play/_PtJo6f_ssxreW7030omwHo6BaaUDnnjsw9f9TAdTXD4NCXfEa_0UjPWAy5WCX0yhOLz8hz10JzffCE8.YxYFuGhASN5FGC4x?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fgeneralassembly.zoom.us%2Frec%2Fshare%2FWto_fzgty-YjOz5FUiS3xQb0Hzak-0mvHmzV1-GbuCnossyuyNuWVgG3zdDh0uXB.C-XS3KxSesOWZ9xm&autoplay=true&startTime=1706055276000)
+passcode - Lbn0a*#Q
+3. Running an checking javascript in the browser [video](https://www.youtube.com/watch?v=Azod_7VscLM)
