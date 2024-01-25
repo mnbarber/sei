@@ -111,10 +111,8 @@ You will have a maximum of 10 minutes to present your project following these gu
 
 > Note: Games are listed in approximate order of increasing difficulty.
 
-1. **Hangman**
-    - A good icebox feature (optional feature) is to allow the player to choose from categories of words.
-1. **Tomagotchi**
 
+1. **Tomagotchi**
 1.  **War**
 1. **Slot Machine**
     - Must implement wagering feature
