@@ -7,3 +7,5 @@ passcode - Lbn0a*#Q
 passcode - !3XADtD*
 5. [git](https://generalassembly.zoom.us/rec/play/WipnEV9nNOsSY6e3aq3q7AJJoxsnY-fK4Ykr1WY8Oksz7FvKgKdEQ3AmewtXsSEbWYrVWLTPAl2ue_en.hay69TXgAvCs0-8Y?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fgeneralassembly.zoom.us%2Frec%2Fshare%2FTL1r72X2VSljlq-DCY8yyMECp7YN7QXW8dnw6V3lM8JIFDNLJa3TL_w3U6mgZSPU.DppOYUIIGG81_SOc)
 passcode - pRKWD5%8
+6. [functions](https://generalassembly.zoom.us/rec/play/FYQgZxUxetNARbsLxdNxphoON1YtWAWs08wm1-jMvIUYg2xDWoNeZCap5TmD2KFKjmUj1GpBauaWasxW.YzyOmLVnzDR7sI3t?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fgeneralassembly.zoom.us%2Frec%2Fshare%2Fz_9r-MrBwPSKpaGt7-AIow5OLuOJDwaWWNK7dyQoCxB1rqUakKwKxQ54KOYyfHns.a7jU1KfWkbICc4ba)
+Passcode: @t1hyb!!
