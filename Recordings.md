@@ -9,3 +9,5 @@ passcode - !3XADtD*
 passcode - pRKWD5%8
 6. [functions](https://generalassembly.zoom.us/rec/play/FYQgZxUxetNARbsLxdNxphoON1YtWAWs08wm1-jMvIUYg2xDWoNeZCap5TmD2KFKjmUj1GpBauaWasxW.YzyOmLVnzDR7sI3t?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fgeneralassembly.zoom.us%2Frec%2Fshare%2Fz_9r-MrBwPSKpaGt7-AIow5OLuOJDwaWWNK7dyQoCxB1rqUakKwKxQ54KOYyfHns.a7jU1KfWkbICc4ba)
 Passcode: @t1hyb!!
+7. [Git review & DOM intro](https://generalassembly.zoom.us/rec/share/905YAcXkKa3YcDOAnV6ILPYZV1TxISYG20gVJbkem9VHXjBJia7hrwoIqZUW--qG.g_xjNcmW9ofcP3cU)
+Passcode: 7tHF??M8
