@@ -11,3 +11,5 @@ passcode - pRKWD5%8
 Passcode: @t1hyb!!
 7. [Git review & DOM intro](https://generalassembly.zoom.us/rec/share/905YAcXkKa3YcDOAnV6ILPYZV1TxISYG20gVJbkem9VHXjBJia7hrwoIqZUW--qG.g_xjNcmW9ofcP3cU)
 Passcode: 7tHF??M8
+8. [DOM Part 2](https://hub.generalassemb.ly/learn/course/front-end-fundamentals-21-parent-us-online-ec-25-september-2023-21-december-2023-200996-v2/dom-manipulation-events/introduction-to-the-dom?page=1)
+Passcode: 4Y&z8e5B
