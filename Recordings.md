@@ -13,3 +13,5 @@ Passcode: @t1hyb!!
 Passcode: 7tHF??M8
 8. [DOM Part 2](https://hub.generalassemb.ly/learn/course/front-end-fundamentals-21-parent-us-online-ec-25-september-2023-21-december-2023-200996-v2/dom-manipulation-events/introduction-to-the-dom?page=1)
 Passcode: 4Y&z8e5B
+9. [HTTP Introduction](https://generalassembly.zoom.us/rec/share/sIj04SQkaI00QoipqriXMouqlrXddL8dLMsAH0mCeX5X9dE8wY2Ye18W6T0LNOM.1gw7biaiAHuYN4_c)
+Passcode: 5wUy9w#O
