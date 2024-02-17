@@ -19,3 +19,7 @@ Passcode: 5wUy9w#O
 Passcode: Er@5t*sY
 11. [Express todos Create](https://generalassembly.zoom.us/rec/share/QaxFvSyoH4qtiV4TZJ4wXktoPCmbPvhwJNmKFEZhSQ7rQ5LHATg4CnOAjmvMuCQ.hCyIc-h8Zw-lQzYr)
 Passcode: $&A1Q^=G
+12.[mongoose create](https://generalassembly.zoom.us/rec/share/DisEe6o6JXu_W1aYML8CZB9QapdV3fYvG8MbQGI4OIOSrzy2w8BwcZ9BMTIyoAnL.F4RvJsGpei_TA0ir)
+Passcode: 9W7RvK^%
+13/ [mongoose index](https://generalassembly.zoom.us/rec/share/5P0kiZpoROaVLEuTb4HW1GYgIRnJTG9eMK7Zpy3fpW9eeCzNZV41mO1c5eont7nj.jNY1vxzbMTIRHDyD)
+Passcode: ^$o06cFg
