@@ -72,91 +72,91 @@ Copying over the user's name from `req.user` in the comment `create` action will
 #### Creating a book
 
 ```js
-function create(req, res) {
+async function create(req, res) {
   const book = new Book(req.body);
   // Assign the logged in user's id
   book.userRecommending = req.user._id;
-  book.save(function(err) {
-    if (err) return return res.redirect('/books/new' /* or a path that displays a custom error */);
+  try {
+    await book.save();
     // Probably want to go to newly added book's show view
     res.redirect(`/books/${book._id}`);
-  });
+  } catch (e) {
+    console.log(e.message);
+    // Probably want to go back to new
+    res.redirect(`/books/new`);
+  }
 }
 ```
 
 #### Deleting a book
 
 ```js
-function deleteBook(req, res) {
-  Book.findOneAndDelete(
-    // Ensue that the book was created by the logged in user
-    {_id: req.params.id, userRecommending: req.user._id}, function(err) {
-      // Deleted book, so must redirect to index
-      res.redirect('/books');
-    }
+async function deleteBook(req, res) {
+  await Book.findOneAndDelete(
+    // Query object that ensures the book was created by the logged in user
+    {_id: req.params.id, userRecommending: req.user._id}
   );
+  // Deleted book, so must redirect to index
+  res.redirect('/books');
 }
 ```
 
 #### Edit a book
 
 ```js
-function edit(req, res) {
-  Book.findOne({_id: req.params.id, userRecommending: req.user._id}, function(err, book) {
-    if (err || !book) return res.redirect('/books');
-    res.render('books/edit', {book});
-  });
+async function edit(req, res) {
+  const book = await Book.findOne({_id: req.params.id, userRecommending: req.user._id});
+  if (!book) return res.redirect('/books');
+  res.render('books/edit', { book });
 }
 ```
 
 #### Update a book
 
 ```js
-function update(req, res) {
-  Book.findOneAndUpdate(
-    {_id: req.params.id, userRecommending: req.user._id},
-    // update object with updated properties
-    req.body,
-    // options object with new: true to make sure updated doc is returned
-    {new: true},
-    function(err, book) {
-      if (err || !book) return res.redirect('/books');
-      res.redirect(`/books/${book._id}`);
-    }
-  );
+async function update(req, res) {
+  try {
+    const updatedBook = await Book.findOneAndUpdate(
+      {_id: req.params.id, userRecommending: req.user._id},
+      // update object with updated properties
+      req.body,
+      // options object {new: true} returns updated doc
+      {new: true}
+    );
+    return res.redirect(`/books/${updatedBook._id}`);
+  } catch (e) {
+    console.log(e.message);
+    return res.redirect('/books');
+  }
 }
 ```
 
 #### Adding a book to a user's reading list
 
 ```js
-function addReading(req, res) {
-  Book.findById(req.params.id, function(err, book) {
-    // Ensure that user is not already in usersReading
-    // See "Finding a Subdocument" in https://mongoosejs.com/docs/subdocs.html
-    if (book.usersReading.id(req.user._id)) return res.redirect('/books');
-    book.usersReading.push(req.user._id);
-    book.save(function(err) {
-      res.redirect(`/books/${book._id}`);
-    });
-  });
+async function addReading(req, res) {
+  const book = await Book.findById(req.params.id);
+  // Ensure that user is not already in usersReading
+  // See "Finding a Subdocument" in https://mongoosejs.com/docs/subdocs.html
+  if (book.usersReading.id(req.user._id)) return res.redirect('/books');
+  book.usersReading.push(req.user._id);
+  await book.save();
+  res.redirect(`/books/${book._id}`);
 }
 ```
 
 #### View all books or based upon a name search
 
 ```js
-function allBooks(req, res) {
+async function allBooks(req, res) {
   // Make the query object to use with Book.find based upon
   // if the user has submitted via a search form for a book name
   let bookQuery = req.query.name ? {name: new RegExp(req.query.name, 'i')} : {};
-  Book.find(bookQuery, function(err, books) {
-    // Why not reuse the books/index template?
-    res.render('/books/index', {
-      books,
-      user: req.user,  // should use middleware instead (see below)
-      nameSearch: req.query.name  // use to set content of search form
-    });
+  const books = await Book.find(bookQuery);
+  // Why not reuse the books/index template?
+  res.render('books/index', {
+    books,
+    nameSearch: req.query.name  // use to set content of search form
   });
 }
 ```
@@ -177,17 +177,19 @@ A form used to create a comment would look something like:
 In the comment controller's create action, we'll need to first find the book to add the comment to:
 
 ```js
-function create(req, res) {
-  Book.findById(req.params.id, function(err, book) {
+async function create(req, res) {
+  try {
+  const book = await Book.findById(req.params.id);
     // Update req.body to contain user info
     req.body.userId = req.user._id;
     req.body.userName = req.user.name;
     // Add the comment
     book.comments.push(req.body);
-    book.save(function(err) {
-      res.redirect(`/books/${book._id}`);
-    });
-  });
+    await book.save();
+  } catch (e) {
+    console.log(e.message);
+  }
+  res.redirect(`/books/${book._id}`);
 }
 ```
 
@@ -206,50 +208,52 @@ A form used to edit a data resource needs to use a query string to inform method
 However, note that the edit form above needs the comment subdoc to be passed from the `edit` controller action in order to properly emit the form's action path and pre-fill in the input element(s).  Here's what that `edit` action code might look like:
 
 ```js
-function edit(req, res) {
+async function edit(req, res) {
   // Note the cool "dot" syntax to query on the property of a subdoc
-  Book.findOne({'comments._id': req.params.id}, function(err, book) {
-    // Find the comment subdoc using the id method on Mongoose arrays
-    // https://mongoosejs.com/docs/subdocs.html
-    const comment = book.comments.id(req.params.id);
-    // Render the comments/edit.ejs template, passing to it the comment
-    res.render('comments/edit', {comment});
-  });
+  const book = await Book.findOne({'comments._id': req.params.id});
+  // Find the comment subdoc using the id method on Mongoose arrays
+  // https://mongoosejs.com/docs/subdocs.html
+  const comment = book.comments.id(req.params.id);
+  // Render the comments/edit.ejs template, passing to it the comment
+  res.render('comments/edit', { comment });
 }
 ```
 
 When the edit comment form is submitted, the `update` action will need to find the **book** that the comment is embedded within based upon the `_id` of the comment being sent as a route parameter:
 
 ```js
-function update(req, res) {
+async function update(req, res) {
   // Note the cool "dot" syntax to query on the property of a subdoc
-  Book.findOne({'comments._id': req.params.id}, function(err, book) {
-    // Find the comment subdoc using the id method on Mongoose arrays
-    // https://mongoosejs.com/docs/subdocs.html
-    const commentSubdoc = book.comments.id(req.params.id);
-    // Ensure that the comment was created by the logged in user
-    if (!commentSubdoc.userId.equals(req.user._id)) return res.redirect(`/books/${book._id}`);
-    // Update the text of the comment
-    commentSubdoc.text = req.body.text;
-    // Save the updated book
-    book.save(function(err) {
-      // Redirect back to the book's show view
-      res.redirect(`/books/${book._id}`);
-    });
-  });
+  const book = await Book.findOne({'comments._id': req.params.id});
+  // Find the comment subdoc using the id method on Mongoose arrays
+  // https://mongoosejs.com/docs/subdocs.html
+  const commentSubdoc = book.comments.id(req.params.id);
+  // Ensure that the comment was created by the logged in user
+  if (!commentSubdoc.userId.equals(req.user._id)) return res.redirect(`/books/${book._id}`);
+  // Update the text of the comment
+  commentSubdoc.text = req.body.text;
+  try {
+    await book.save();
+  } catch (e) {
+    console.log(e.message);
+  }
+  // Redirect back to the book's show view
+  res.redirect(`/books/${book._id}`);
 }
 ```
 
 #### Delete a comment
 
-A form used to delete a data resource needs to use a query string to inform method-override middleware to change the post to a DELETE request.
+A form used to delete a data resource needs to use a query string to inform method-override middleware to change the post to a DELETE request. Of course, we only want to show the delete form if the comment was created by the logged in user.
 
 Also, note that the proper RESTful route passes the `_id` of the comment, not the book that it's embedded within:
 
 ```html
-<form action="/comments/<%= comment._id %>?_method=DELETE" method="POST">
-  <button type="submit">DELETE COMMENT</button>
-</form>
+<% if (user?._id.equals(comment.user)) { %>
+  <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST">
+    <button type="submit">DELETE COMMENT</button>
+  </form>
+<% } %>
 ```
 
 However, you'll only want to render the above form if the comment was created by the logged in user - you don't want users deleting each other's comments! Here's how you can conditionally render the delete comment form for only the comments created by the logged in user:
@@ -272,21 +276,16 @@ However, you'll only want to render the above form if the comment was created by
 When the delete comment form is submitted, just like with the `update` action above, the `delete` action will need to find the **book** that the comment is embedded within based upon the `_id` of the comment being sent as a route parameter and also ensuring that the logged in user was the creator of the comment:
 
 ```js
-function deleteComment(req, res) {
+async function deleteComment(req, res) {
   // Note the cool "dot" syntax to query on the property of a subdoc
-  Book.findOne(
-    {'comments._id': req.params.id, 'comments.userId': req.user._id},
-    function(err, book) {
-      if (!book || err) return res.redirect(`/books/${book._id}`);
-      // Remove the subdoc (https://mongoosejs.com/docs/subdocs.html)
-      book.comments.remove(req.params.id);
-      // Save the updated book
-      book.save(function(err) {
-        // Redirect back to the book's show view
-        res.redirect(`/books/${book._id}`);
-      });
-    }
-  );
+  const book = await Book.findOne({'comments._id': req.params.id, 'comments.userId': req.user._id});
+  if (!book) return res.redirect(`/books/${book._id}`);
+  // Remove the subdoc (https://mongoosejs.com/docs/subdocs.html)
+  book.comments.remove(req.params.id);
+  // Save the updated book
+  await book.save();
+  // Redirect back to the book's show view
+  res.redirect(`/books/${book._id}`);
 }
 ```
 
