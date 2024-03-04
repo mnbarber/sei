@@ -33,3 +33,5 @@ Passcode: *8SJ^Pz6
 Passcode: mH3K6$%9
 17. [review & delete](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/vPRd_wEGN_nzMF_uaKRnfEVjCdbG1xTZRX1Ckf1vH31zA4KblY3Vua5mQZTPeJqv.LSTNpemL6MN6uOjn__;!!GgcXpDZ2N9l6uyZJ!n_yPATIQzp0Hc3gJbOBRQe1k34whppcnSwPOumMDs1N0CQW_fF3AZe07jAC6rNUFrM3iVVEydFb5EtdbYuYWNM0hvKg$)
 Passcode: L@*UM1H8
+18. [Intro to react & Props](https://generalassembly.zoom.us/rec/play/VStdK9TXy5pgitjqnxkLVsqRxw4pBZ0KVk4RyET6vFxLyj5BSrzlwVK68N71hOk8FO40QfrTbVN4iau_.FhEkh0d5k10Z1eIw?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fgeneralassembly.zoom.us%2Frec%2Fshare%2Fxh03fe8qbk3YStk2dVKyARClCbeZwXGCFNec23Fr71fU7AV9PuMnThcBuwOPAoI9.jjyJhbBYFcyFiFgo)
+Passcode: !4T4!dZP
