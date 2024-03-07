@@ -35,3 +35,5 @@ Passcode: mH3K6$%9
 Passcode: L@*UM1H8
 18. [Intro to react & Props](https://generalassembly.zoom.us/rec/play/VStdK9TXy5pgitjqnxkLVsqRxw4pBZ0KVk4RyET6vFxLyj5BSrzlwVK68N71hOk8FO40QfrTbVN4iau_.FhEkh0d5k10Z1eIw?canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fgeneralassembly.zoom.us%2Frec%2Fshare%2Fxh03fe8qbk3YStk2dVKyARClCbeZwXGCFNec23Fr71fU7AV9PuMnThcBuwOPAoI9.jjyJhbBYFcyFiFgo)
 Passcode: !4T4!dZP
+19. [review and state change](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/9bnu3YXWOAfdgROPbF_ZHY7IJPUlPuLUAa2wtTnS3kHPSsuvX6_oFRaSz5IiL9pr.Li3Q7M2MZB6AoM4u__;!!GgcXpDZ2N9l6uyZJ!iwuzIlVGA3EXvoZMlugXH8bJlxjcxvnLsY12L09FCXMxjFLGjVwYS17M2Jqn8nqB1qkH-d7eif-qy_HQr00VoQ_pXPU$)
+Passcode: Ad5@!R@?
