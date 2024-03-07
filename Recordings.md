@@ -39,3 +39,5 @@ Passcode: !4T4!dZP
 Passcode: Ad5@!R@?
 20. [Review, Lifting state, API CALL TO OMDB](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/FWs9DjeUoGDWadTqnxOf8UX_h9fZe7PfKq04HLSQNTs40WHrmJQa0u6Y_XUw9bjW.12V3vSWm6TPCvvKl__;!!GgcXpDZ2N9l6uyZJ!kdlVUb4J1ynOaIPNXVbu4LiqinUT3Rs1VdxqiMhMX3Z5q-tX9uAj7nEqxgVX1ABDEw2aPVQ3zz-0c_5znKuayu5WsCQ$)
 Passcode: 1YmEn%6A
+21. [Review of the chain of everything in react omdb, lifting state](https://generalassembly.zoom.us/rec/share/26NsR06o3CrEjrZw_ug_9Ez5HrXmvsRPLZFDRFO7DxVkYaXSQHG73ycQxi6KCv0.hB_wv2nDUNPakuw8)
+Passcode: ?4R=XFDH
