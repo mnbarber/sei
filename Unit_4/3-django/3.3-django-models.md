@@ -1,0 +1,812 @@
+<img src="https://i.imgur.com/s8QeOpo.png">
+
+# Intro to Django Models
+
+## Learning Objectives
+
+| Students will be able to: |
+|---|
+| Define a Django Model for a data entity |
+| Generate migrations when Models are added or updated |
+| Run pending migrations |
+| Implement a Details page for a single model instance |
+
+## Road Map
+
+1. Setup
+2. The Model Layer in the Django Architecture
+3. Quick Refactor of the Existing Code
+4. What's a Model?
+5. Models in Django
+6. Making and Running Migrations
+7. Performing CRUD Using Django's ORM
+8. Using the `Cat` Model in Cat Collector
+9. I am the Admin!
+10. Adding a Cat "Details" Page
+11. Removing Hand-coded URLs in Templates
+
+## 1. Setup
+
+The code for this lesson picks up right where we left off in the _Django URLs, Views & Templates_ lesson.
+
+If your Cat Collector is up and running from the last lesson, there's no reason to sync, otherwise...
+
+<details>
+<summary>
+👀 Do you need to sync your code?
+</summary>
+<hr>
+
+**`git reset --hard origin/sync-6-models-starter`**
+
+<hr>
+</details>
+
+## The Model Layer in the Django Architecture
+
+<img src="https://i.imgur.com/1fFg7lz.png">
+	
+This lesson focuses on the **Model layer** which provides **Views** with access to the **database**.
+
+## 3.Quick Refactor of the Existing Code
+
+Before we begin to learn about Django Models, let's do a quick refactor of the code from where we left off in the _Django URLs, Views and Templates_ lesson...
+
+### 👉 You Do - Refactor **home.html** (2 mins)
+
+Currently, the "Home" page is not inheriting from **base.html**:
+
+<img src="https://i.imgur.com/xBIuITQ.png">
+
+1. Refactor **main_app/templates/home.html** to extend **main_app/templates/base.html** like the other templates are doing.
+
+2. Be sure to remove the unnecessary boilerplate too.  
+
+That's better!
+
+<img src="https://i.imgur.com/z3mSguU.png">
+
+<details>
+<summary>
+Try not to peek!
+</summary>
+<hr>
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Home</h1>
+
+{% endblock %}
+```
+
+<hr>
+</details>
+
+## 4. What's a Model?
+
+**Models** are used to perform CRUD data operations on a database.
+
+Remember **entities** in the Entity-Relationship-Diagrams?
+
+A Django Model represents a single entity from the ERD.
+
+Thus, a Model has a one-to-one mapping with a table in the database and is used to perform create, read, update and delete (CRUD) data operations on that table.
+
+When we retrieve data from the database (using a Model of course), we will have **model objects**, each of which represents a row in a database table.
+
+Django refers to the model objects as simply **objects**.
+
+We can update and render the attributes of these **objects** in the same way we worked with Mongoose documents.
+
+## 5. Models in Django
+
+Each Model is defined as a Python class that inherits from `django.db.models.Model`.
+
+Here's the **Cat** entity from an ERD and the code to define the equivalent Model:
+
+<img src="https://i.imgur.com/gwlOAXc.png">
+
+All of the Models for an app are defined in the app's `models.py` file.
+
+Let's create the `Cat` Model by typing in the above code.
+
+Note that each field (attribute) is represented by a Field class, e.g., `CharField`. Here are the [docs of available Field types](https://docs.djangoproject.com/en/4.1/ref/models/fields/#model-field-types) - there's plenty of options.
+
+The Field types for a Model don't just determine the column's data type in the table, Django also uses this information:
+
+- To implement some validation in automatically-generated forms.
+- To determine the default HTML [widget](https://docs.djangoproject.com/en/4.1/ref/forms/widgets/) to render in forms for the Model. For example, a `CharField` uses a `<input type="text">` as its _widget_, whereas, a `TextField` uses a `<textarea>`.
+
+### ❓ Review Questions (1 min)
+
+<details>
+<summary>
+In Django, what is used to perform CRUD database operations?
+</summary>
+<hr>
+
+**A Model**
+
+<hr>
+</details>
+
+<details>
+<summary>
+How is a Model defined in Django?
+</summary>
+<hr>
+
+**As a Python class that inherits from `models.Model`**
+
+<hr>
+</details>
+
+<details>
+<summary>
+An ERD Entity maps to a _____ in Django, which maps to a _____ in the database.
+</summary>
+<hr>
+
+An ERD Entity maps to a **Model** in Django, which maps to a **table** in the database.
+
+<hr>
+</details>
+
+## 6. Making and Running Migrations
+
+### What are Migrations?
+
+[Migrations](https://docs.djangoproject.com/en/4.1/topics/migrations/) are used to synchronize a database's schema with the project's Models.
+
+Migrations are used to evolve a database over time - as the requirements of the application change.  However, they can be "destructive" (cause a loss of data), so be careful with migrations if you're working with an application in _production_.
+
+Migrations in Django are Python files that are created by running a command Django in Terminal and are stored in a folder named **migrations**.
+
+### Making Migration Files
+
+Okay, we've defined a `Cat` Model, but the database does not yet have a table to hold all of our objects (rows). 
+
+The following command creates migration files for all Models that have been added or changed since the last migration:
+
+```
+python3 manage.py makemigrations
+```
+
+The output in the terminal informs us that the following migration file was created: `main_app/migrations/0001_initial.py`
+
+You don't have to do anything with the migration files, but since this is the first time we've made one, let's open it and take a peek.
+
+> 👀 You should rarely need to edit migration files by hand, but it’s entirely possible to do so if you ever need to.
+
+### Running Migrations
+
+Simply creating migration files does not update the database's schema.
+
+To check the status of migration files, run the following:
+
+```
+python3 manage.py showmigrations
+```
+
+Unchecked (pending) migrations have not yet been applied to the database.
+
+Use the `migrate` command to apply pending migrations and update the database:
+
+```
+python3 manage.py migrate
+```
+
+`OK` messages are a good thing 😊
+
+### ❓ Review Questions (½ min)
+
+<details>
+<summary>
+What are used to update a database's schema over time as an application's functionality evolves?
+</summary>
+<hr>
+
+**Migrations**
+
+<hr>
+</details>
+
+<details>
+<summary>
+When is it necessary to make and run migrations?
+</summary>
+<hr>
+
+**Whenever a Model is added or updated in a way that impacts the database's schema.**
+
+<hr>
+</details>
+
+<details>
+<summary>
+👀 Do you need to sync your code?
+</summary>
+<hr>
+
+**`git reset --hard origin/sync-7-cat-model`**
+
+Then be sure to run:
+
+**`python3 manage.py migrate`**
+
+<hr>
+</details>
+
+## 7. Performing CRUD Using Django's ORM
+
+### What's an ORM?
+
+ORM stands for Object-Relational-Mapper.
+
+It's called an ORM because it creates Python objects from rows in a relational database table and vice-versa.
+
+The ORM allows developers to write object-oriented code to CRUD data instead of using SQL directly.
+
+ORMs make application developers more productive.
+
+The fact is, the ORM in Django can generate SQL that even the most experienced developer would struggle to write.
+
+Another benefit is that the ORM provides a level of abstraction that enables us to write the same Python code to CRUD data, regardless of which database engine is being used! Yes, it's even possible to use MongoDB with Django.
+
+### Django "Objects" (Terminology)
+
+Django refers to **objects** throughout its documentation.
+
+A Django Object is:
+
+- An instance of a Django Model
+- A row in the database
+- An instance of our Data Entity/Resource
+
+### Django's ORM
+
+The Django ORM is automatically going to generate, a plethora of methods for each Model.
+
+Django's ORM includes methods for performing:
+
+- Filtering (querying based on criteria)
+- Ordering
+- Even accessing the data from related Models!
+
+Django refers to the ORM functions available as its [database API](https://docs.djangoproject.com/en/4.1/topics/db/queries/). Additional documentation can be [found here](https://docs.djangoproject.com/en/4.1/ref/models/).
+
+### Performing CRUD in a Python Interactive Shell
+
+After creating a new Model, you can take it for a test drive using a Python shell that loads the Django environment:
+
+```
+python3 manage.py shell
+```
+
+Any model you want to work with must be imported just like you will have to do in the application:
+
+```python
+>>> from main_app.models import Cat
+```
+
+> 👀 The code we type in the shell to perform CRUD is going to be the same or similar to the code we use in the application's views!
+
+To retrieve all of the Cat objects, enter this command:
+
+```python
+>>> Cat.objects.all()
+<QuerySet []>
+```
+
+### The Django Model Manager
+
+The `objects` attribute attached to `Cat` Model above is known at the **Manager**.
+
+We use the Manager to perform query operations on a Model to retrieve objects (rows in a database table).
+
+The Manager also has a `create` method that can be used to create objects.
+
+### **The `<QuerySet>`**
+
+The `<QuerySet []>` returned represents a database query that can be refined by chaining additional methods to it.
+
+Ultimately though, when the app needs the data, for example, to iterate over cats, the query will be sent to the database and the result is a list-like object that represents a collection database objects.
+
+### Give Me a "C"
+
+Here's how we can create an in-memory object (an instance of a Model) and then save it to the database:
+ 
+```python
+>>> c = Cat(name="Biscuit", breed='Sphinx',
+>>> description='Evil looking cuddle monster. Hairless', age=2)
+>>> c.__dict__
+{..., 'id': None, 'name': 'Biscuit', 'breed': 'Sphinx',
+ 'description': 'Evil looking cuddle monster. Hairless', 'age': 2}
+```
+
+As you can see, we pass the data for the model's attributes as kwargs.
+
+> 👀 The model currently has `None` as its `id` because it is not yet saved to the database.
+
+```python
+>>> c.save()
+>>> c.id
+1
+```
+
+Calling the `save()` method on an object saves it to the database.
+
+Run `Cat.objects.all()` again and you'll see a `Cat` object exists now:
+
+```python
+>>> Cat.objects.all()
+<QuerySet [<Cat: Cat object (1)>]>
+```
+
+### 👉 You Do - Create Another Cat (2 mins)
+
+- Create another `Cat` with attribute values of your choice.
+
+- Since there's no reason we need to remember the current cat object held by the variable `c`, feel free to re-use that variable.
+
+- Check that your cat was added by using `Cat.objects.all()`.
+
+### Adding a `__str__` Method
+
+It's a best practice to override the `__str__` method in Models so that they will print in a more helpful way.
+
+For the `Cat` model, we'll code `__str__` to return the cat's `name` attribute:
+
+```python
+# main_app/models.py
+...
+  age = models.IntegerField()
+
+  # new code below
+  def __str__(self):
+    return self.name
+```
+
+Changes made to a Model do not become active in the shell unless you `exit()`, re-launch, and re-import the Models...
+
+### 👉 You Do - Reload the Shell (1 min)
+
+- `exit()` or `ctrl + D` to exit the current shell.
+- Relaunch the shell (see above)
+- Import the `Cat` Model (see above)
+
+### Give Me a "U"
+
+The attributes can be updated by simply assigning the new values then calling the object's `save()` method:
+
+```python
+>>> from main_app.models import Cat
+>>> c = Cat.objects.first()
+>>> c
+<Cat: Biscuit>
+>>> c.name = 'Rubber Biscuit'
+>>> c.save()
+>>> c
+<Cat: Rubber Biscuit>
+```
+
+### Filtering (querying) for Records
+
+We use [objects.filter()](https://docs.djangoproject.com/en/4.1/ref/models/querysets/#filter) to query a Model's table for data that matches criteria similar to how we used the `find()` Mongoose method.
+
+For example, this query would return all cats with the name "Rubber Biscuit":
+
+```python
+>>> Cat.objects.filter(name='Rubber Biscuit')
+<QuerySet [<Cat: Rubber Biscuit>]>
+```
+
+<details>
+<summary>
+❓ The <code>name='Rubber Biscuit'</code> is not a Python comparison expression, it's a Python _____.
+</summary>
+<hr>
+
+**kwarg**
+
+<hr>
+</details>
+
+Using `objects.filter()` and `objects.exclude()` is similar writing a `WHERE` clause in SQL.
+
+The Django ORM creates several helpful [Field lookups](https://docs.djangoproject.com/en/4.1/topics/db/queries/#field-lookups).
+
+For example if we wanted to query for all cats whose names _contain_ a certain string:
+
+```python
+>>> Cat.objects.filter(name__contains='Bis')
+<QuerySet [<Cat: Rubber Biscuit>]>
+```
+The above code will result in a SQL query similar to:
+
+```sql
+SELECT * FROM main_app_cat WHERE name LIKE '%Bis%';
+```
+
+As another example, here's how we can find cats that have an age _equal to or less than_ 3:
+
+```python
+>>> Cat.objects.filter(age__lte=3)
+<QuerySet [<Cat: Biscuit>]>
+```
+
+For basic lookups, the format is:  `field__lookuptype=value` (that's a double underscore).
+
+Filters can even be chained!
+
+Like most things in SEI, learning how to use `filter()` will take practice.
+
+### Reading a Single Record
+
+You've seen how `Cat.objects.all()` and `Cat.objects.filter()` returns a list of objects.
+
+However, it's a very common data operation to read one specific model object from the table based on some provided value, usually its `id`. 
+
+Instead of the `objects.all()` method, we can use the [objects.get()](https://docs.djangoproject.com/en/4.1/ref/models/querysets/#get) method instead to read a single object:
+
+```python
+Cat.objects.get(id=1)
+```
+
+The `get()` method can also be called with multiple `field=value` arguments to query multiple columns.
+
+Be sure to use error handling if there's a chance that `get()` won't find what you're looking for because if Django doesn't find it, an error is raised.
+
+### What About Ordering (sorting)?
+
+Similar to what you saw in SQL, there's an [order_by](https://docs.djangoproject.com/en/4.1/ref/models/querysets/#order-by) method:
+
+```python
+>>> Cat.objects.order_by('name')
+``` 
+
+Or in descending order:
+
+```python
+>>> Cat.objects.order_by('-age')
+```
+
+The `<QuerySet>` object can be indexed and sliced like other sequences too.
+
+Poor old cat:
+
+```python
+>>> Cat.objects.order_by('-age')[0]
+```
+
+## 8. Using the `Cat` Model in Cat Collector
+
+Time to add some of this ORM magic to Cat Collector!
+
+Currently, we are "faking" the data by using a `list` of cats.
+
+Time to update **main_app/views.py**...
+
+First let's be sure to remove `cats` list.
+
+Now let's write the code that uses the `Cat` Model to read all of the cat objects:
+
+```python
+# main_app/views.py
+
+from django.shortcuts import render
+# Import the Cat Model
+from .models import Cat
+
+...
+
+def cats_index(request):
+  cats = Cat.objects.all()
+  return render(request, 'cats/index.html', { 'cats': cats })
+```
+
+Don't forget to import the `Cat` Model too!
+
+Refresh the page and you should see something like this:
+
+<img src="https://i.imgur.com/FN26kDm.png">
+
+Nice!
+
+<details>
+<summary>
+👀 Do you need to sync your code?
+</summary>
+<hr>
+
+**`git reset --hard origin/sync-8-use-cat-model`**
+
+<hr>
+</details>
+
+## 9. I am the Admin!
+
+But wait, there's another really REALLY neat thing about Django - it comes with built-in administrator functionality! Remember that `django.contrib.admin` in the `INSTALLED_APPS`? Time to use that app!
+
+First though, we need a **super user**.
+
+A super user is an administrator for the site that can access the Admin app to view and manipulate the data in the database.
+
+Run this command in the terminal to create the super user:
+
+```
+python3 manage.py createsuperuser
+```
+
+You will be prompted to enter a username, email address, and a password.
+
+Although Django will want you to create a password that's complex, you can bypass it by typing `y` at the warning prompt.
+
+Now go to your browser and type `localhost:8000/admin` to access the administration portal!  
+
+Did you mess up your password? It's okay - no big fish. Go back to your terminal and use this handy command:
+
+```
+python3 manage.py changepassword <user_name>
+```
+
+We won't initially see Cats in the admin portal because the admin app doesn't know about Models in the project unless they are first "registered" with it.
+
+We register our Models in the `main_app/admin.py` file:
+
+```python
+from django.contrib import admin
+# import your models here
+from .models import Cat
+
+# Register your models here
+admin.site.register(Cat)
+```
+
+No need to restart the server - just refresh that beautiful portal!
+
+We can add, edit, and remove data objects anytime we need to by browsing to `/admin` - neat!
+
+## 10. Adding a Cat "Details" Page
+
+Typically, the _index_ page showing all cats would only show a "summary" of each cat's info.  For example, just their "name" perhaps.
+
+Now we want to implement _detail_ functionality - similar to the _show_ functionality we implemented in Express.
+
+Specifically, when a cat on the _index_ page is clicked we want to see that cat's _detail_ page...
+
+### Follow the Same 5-Steps to Add Functionality to a Django Project!
+
+Remember, nothing is going to happen unless an HTTP request leaves the browser informing the server what the app wants to do.
+
+When adding additional functionality to a web app we need to do the following:
+
+1. With Django, decide the appropriate URL for the route.  Because Django does not follow the RESTful routing methodology, you are free to name the URLs as you see fit. 
+2. Add the UI that is going to trigger the HTTP request to be sent to the server. For example, adding a `<form>` to submit a new cat.
+3. Code the route on the server.  In the case of Django, this is done by adding an additional `path(...)` to the `urlpatterns` list within the app's `urls.py` module. **Each entry in `urlpatterns` determines what code will run when the URL matches an HTTP request**.
+4. Now you need to add the _view function_ referenced by the `path(...)` inside of the **views.py** module. The _view function_ contains the code to perform CRUD, etc. It ultimately is responsible for responding to the client's request...
+5. If data was changed, respond with a **redirect**. Otherwise, you'll typically **render** a _template_, optionally passing data to it. If a _template_ is required, time to write it, and you're done - other than debugging.
+
+Make it a habit to follow the steps above anytime you need new functionality in your app.
+
+### The User Story
+
+> AAU, when I click on a cat in the cat list, I want to see a page that displays all the details for that cat.
+
+#### Step 1 - Determine the Proper Route
+
+In Django, we don't worry about the HTTP method when determining the "proper" route for a feature.
+
+So what should the path be for viewing a single cat's detail page?
+
+Once again, we can use a RESTful path:
+
+```
+/cats/:id
+```
+
+We'll see how to define that route parameter Django style in Step 3.
+
+#### Step 2 - Add the UI
+
+Again, only one of two HTML elements:
+
+- A hyperlink (`<a>`) commonly used to navigate, or a
+- A  `<form>` commonly used to modify or send data to the server.  BTW, always code a `method=POST` attribute in forms unless using the form to perform a search, in which case, we use `method=GET` instead.
+
+Clicking on a cat's "card" in the **index.html** should trigger the request to the server to view the details of a cat.
+
+We can accomplish this by wrapping the card's content with an `<a>` tag and setting its `href` appropriately:
+
+```html
+<div class="card">
+  <!-- Add this single line below -->
+  <a href="/cats/{{ cat.id }}">
+    <div class="card-content">
+      <span class="card-title">{{ cat.name }}</span>
+      <p>Breed: {{ cat.breed }}</p>
+      <p>Description: {{ cat.description|linebreaks }}</p>
+      {% if cat.age > 0 %}
+        <p>Age: {{ cat.age }}</p>
+      {% else %}
+        <p>Age: Kitten</p>
+      {% endif %}
+    </div>
+  <!-- Add the following one as well -->
+  </a>
+</div>
+```
+
+The above is very similar to what we did in EJS templates.
+
+> 👀 What's that `{{ cat.description|linebreaks }}` all about?  Well, [linebreaks](https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#linebreaks) is known as a filter in DTL which provides a way to "transform" output.  In this case, `cat.description`, being a `TextField` allows users to input multiple lines, however, without a `linebreaks` or `linebreaksbr` filter, the text will be rendered without line breaks.
+
+After refreshing the page, hover over a cat card and check the URL in the bottom-left of the browser window. It should look something like:<br>`localhost:8000/cats/2`.
+
+Cool, on to the next step...
+
+#### Step 3 - Define the Route
+
+Now that clicking a cat card is going to send a request like `GET /cats/1`, we need to add a new route entry to the `urlpatterns` list in **main_app/urls.py** that will match this request:
+
+```python
+urlpatterns = [
+  path('', views.home, name='home'),
+  path('about/', views.about, name='about'),
+  path('cats/', views.cats_index, name='index'),
+  # new route below 
+  path('cats/<int:cat_id>/', views.cats_detail, name='detail'),
+]
+```
+
+In Django, we use angle brackets to declare a _URL parameter_ to capture values within the _segments_ of a URL as follows.
+
+The `int:` part is called a "converter" and it's used to match and convert the captured value from a string into, in this case, an integer.
+
+If the data in the segment does not look like an integer, then it will not be matched - this is different than what we saw in Express where URL parameters were always string values. 
+
+We've decided that the newly added route will invoke an appropriately named view function, `cats_detail`...
+
+#### Step 4 - Code the View
+
+As you know, view functions are defined within **views.py**.
+
+Here's the new `cats_detail` function:
+
+```python
+# main_app/views.py
+
+...
+
+def cats_detail(request, cat_id):
+  cat = Cat.objects.get(id=cat_id)
+  return render(request, 'cats/detail.html', { 'cat': cat })
+```
+
+> 👀 Django will pass any captured URL parameters as a named argument to the view function!
+
+The `cats_detail` function is using the `get` method to obtain the cat object by its `id`.
+
+<details>
+<summary>
+❓ What determined the parameter name of <code>cat_id</code> in the <code>cats_detail</code> view function?
+</summary>
+<hr>
+
+**The route parameter in urls.py:**
+
+```
+'cats/<int:cat_id>/'
+```
+
+<hr>
+</details>
+
+#### Step 5 - Respond by Rendering or Redirecting
+
+So we want to render the cat data within a **detail.html** template...
+
+The `cats_detail` view function is passing a dictionary of data (called the _context_) to a template called **cats/detail.html**.
+
+Create that **cats/detail.html** template:
+
+```
+touch main_app/templates/cats/detail.html
+```
+
+Now let's add the following template code:
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Cat Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ cat.name }}</span>
+    <p>Breed: {{ cat.breed }}</p>
+    <p>Description: {{ cat.description|linebreaks }}</p>
+    {% if cat.age > 0 %}
+      <p>Age: {{ cat.age }}</p>
+    {% else %}
+      <p>Age: Kitten</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+```
+
+It's basically the same cat "card" from **cats/index.html**, except the wrapping `<a>` tags have been removed.
+
+Okay, let's refresh and check it out!
+
+<img src="https://i.imgur.com/mee5Cxv.png">
+
+## 11. Removing Hand-coded URLs in Templates
+
+Although everything works nicely, hand-coding the URLs in templates, is not considered a good practice because during development, URL's may change.
+
+In **cats/index.html**, we currently find:
+
+```html
+...
+<div class="card">
+  <a href="/cats/{{ cat.id }}">
+  ...
+```
+
+Django has a better way!
+
+Let's take another look at the `urlpatterns` in **urls.py**:
+
+```python
+urlpatterns = [
+  path('', views.home, name='home'),
+  path('about/', views.about, name='about'),
+  path('cats/', views.cats_index, name='index'),
+  path('cats/<int:cat_id>/', views.cats_detail, name='detail'),
+]
+```
+
+Those `name` kwargs within each `path` are used to obtain the correct URL in templates using DTL's [url](https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#url) template tag!
+
+In **cats/index.html**, replace this code:
+
+```html
+<a href="/cats/{{cat.id}}">
+```
+
+With this code:
+
+```html
+<a href="{% url 'detail' cat.id %}">
+```
+
+The above is the Django way.
+
+**Congrats on coding the Django `Cat` Model and adding the _detail_ functionality for the Cat Collector!**
+
+<details>
+<summary>
+👀 Do you need to sync your code?
+</summary>
+<hr>
+
+**`git reset --hard origin/sync-9-finish-models`**
+
+<hr>
+</details>
+
+## Lab
+
+For practice, do everything we did in this lesson on your Finch Collector project!
+
+Don't forget to make commits.
+
+## Resources
+
+[Django Model API](https://docs.djangoproject.com/en/4.1/ref/models/)
