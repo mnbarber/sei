@@ -41,3 +41,7 @@ Passcode: Ad5@!R@?
 Passcode: 1YmEn%6A
 21. [Review of the chain of everything in react omdb, lifting state](https://generalassembly.zoom.us/rec/share/26NsR06o3CrEjrZw_ug_9Ez5HrXmvsRPLZFDRFO7DxVkYaXSQHG73ycQxi6KCv0.hB_wv2nDUNPakuw8)
 Passcode: ?4R=XFDH
+22. [intro to jwt and starter code, aws s3 setup](https://generalassembly.zoom.us/rec/share/bg2BpxWccZufm03B1H6F0E-pNYmUZu7xKt-YMNrJ29fV3GbgcMOC9RBfOBG9-n9e.x-XNxTT7ycVc0NPf)
+Passcode: $Q9rWJ#g
+23 [Signup Page setup UI](https://generalassembly.zoom.us/rec/share/J5mG90GB7cU0uz3XSwHNs4AVoVF4drGnyKaz75rTZKKJ11sGeqwLmGYx4iH_ZnMj.934xgSzLEcH-QoBY)
+Passcode: 3rSP$*!B
