@@ -45,3 +45,5 @@ Passcode: ?4R=XFDH
 Passcode: $Q9rWJ#g
 23 [Signup Page setup UI](https://generalassembly.zoom.us/rec/share/J5mG90GB7cU0uz3XSwHNs4AVoVF4drGnyKaz75rTZKKJ11sGeqwLmGYx4iH_ZnMj.934xgSzLEcH-QoBY)
 Passcode: 3rSP$*!B
+24. [Signup Page Part 2, aws upload and http request](https://generalassembly.zoom.us/rec/share/-6us-YFyx053BUVuB5dNhmgEjyEW_xUAjGNcSLeLdmiL0JqN7N6WizMLT-w4SWBV.YNYyl_8ie064sI3M)
+Passcode: .K9CFwG?
