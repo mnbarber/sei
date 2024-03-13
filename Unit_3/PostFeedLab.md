@@ -36,7 +36,7 @@ async function index(req, res){
 
 - The format of the function will essentially be the same as the Post except you are making a get request, also do you need a body of the request if its a get request?
 
-- After you confirm that you are loading posts when the component loads, by checking the devtools and viewing the `Feed` components state, then you'll want to pass those `posts` as props to the `PostDipslay.jsx` component
+- After you confirm that you are loading posts when the component loads, by checking the devtools and viewing the `Feed` components state, then you'll want to pass those `posts` as props to the `PostFeed.jsx` component
 
 **PostFeed.jsx** 
 
