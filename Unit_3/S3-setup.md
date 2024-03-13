@@ -168,17 +168,8 @@ Congrats!  You now have an S3 bucket that, using the access keys, an application
 
 Now let's get on with the app!
 
-### Install & Configure - Boto 3
+### Install & Configure 
 
-#### Install `boto3`
-
-The official Amazon AWS SDK (Software Development Kit) for Python is a library called [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html).
-
-Let's install it:
-
-```
-$ pip3 install boto3
-```
 
 #### Configure Credentials
 
