@@ -42,7 +42,7 @@ async function index(req, res){
 
 - The job of this component is to set up the layout that will render out all the `PostCard` components.
 
-- Hint you can use semanitic UI's `grid` and `grid.Column` components to set up the feed layout in this component. It may look very similiar to the use of the grid component in the Login page. Pay attention to the props.  Remember on the docs by clicking on the tab at the top of the grid component page, you can see all the props you can add.  (IT's going to look very similar to something you already did!)
+- Check out the CardGroup component to maninpulate the layout from semantic ui react
 
 - Then finally this component will render out each post, but will pass the *EACH* post to the `PostCard` component you made earlier that will contain all the styling for *EACH* post
 
