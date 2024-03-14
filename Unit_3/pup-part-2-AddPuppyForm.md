@@ -17,19 +17,17 @@
 
 We are going to develop our Feed Page today.  
 
-- Lets go ahead and create a component to hold our page!
+- Lets go ahead and create a component to hold our page! Anything rendered by a route is put in the pages folder. 
 
 ```
-mkdir Feed
-touch Feed/Feed.jsx
+mkdir src/pages/FeedPage
+touch src/pages/FeedPage/FeedPage.jsx
 ```
 
 and then lets just render out something simple to test it
 
 ```js
-import React, from 'react';
-
-export default function Feed(props){  
+export default function FeedPage(props){  
     return (
         <>
         <span>The Feed</span>
@@ -43,7 +41,7 @@ and then render it out instead of our home page.
 
 ```js
 // top of file
-import Feed from '../Feed/Feed'
+import FeedPage from '../FeedPage/FeedPage'
 
 // rest of code
 
@@ -51,7 +49,7 @@ return (
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <Feed />
+              <FeedPage />
           </Route>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
@@ -72,7 +70,7 @@ Looking back on the wireframe
 <br>
 1. Header Component <br/>
 2. a addPostForm Component <br/>
-3. Post Gallery Component that will render each Post <br/>
+3. PostFeed Component that will render each Post <br/>
 4. A Card for each Post <br />
 </details>
 
@@ -112,12 +110,12 @@ export default function AddPostForm(){
 
 ```
 
-- components/PostGallery/PostGallery.jsx
+- components/PostFeed/PostFeed.jsx
 
 ```js
 import React from 'react';
 
-export default function PostGallery(props){
+export default function PostFeed(props){
 
     return (
        <div>THIS IS THE POST FEED THAT WILL RENDER OUT EACH POST AS A CARD</div>
@@ -148,11 +146,11 @@ import React, { useState } from "react";
 
 import PageHeader from "../../components/Header/Header";
 import AddPost from "../../components/AddPost/AddPost";
-import PostGallery from "../../components/PostGallery/PostGallery";
+import PostFeed from "../../components/PostFeed/PostFeed";
 
 import { Grid } from "semantic-ui-react";
 
-export default function Feed() {
+export default function PostFeed() {
 
 
   return (
@@ -169,7 +167,7 @@ export default function Feed() {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <PostGallery />
+          <PostFeed />
         </Grid.Column>
       </Grid.Row>
     </Grid>
@@ -183,12 +181,12 @@ export default function Feed() {
 
 - Lets first create our form, It is going to look very similiar to yesterday 
 
-- AddPostForm
+- AddPostFeed
 
 **Challenge**
 
 ```js
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
 export default function AddPostForm() {
@@ -230,7 +228,7 @@ export default function AddPostForm() {
 ### solution
 
 ```js
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
 export default function AddPostForm(props) {
@@ -297,83 +295,105 @@ Styling - we are using semantic ui's [grid prop](https://react.semantic-ui.com/c
 
 formData - Since we have to send over a formData to the server we have to create formData and append our state propeties to it, and this is what we will pass to our function that will make our api call to our server.
 
-**Creating a fetch Post function**
+**Creating a fetch Post function in handleAddPost**
 
-- Since we are dealing with a new resource "posts", we'll create a new utility module to handle all of its crud operations.
 
-```
-mkdir utils/postApi.js
-```
-
-What is going to be are base URL for this resource? Hint look at the server and see what is set up to handle the "post resource requests"
 
 ```js
 // Making a request to create a POST
 // this function will occur when a user is logged in
 // so we have to send the token to the server!
-export function create(data){
-	return fetch(BASE_URL, {
-		method: 'POST',
-		body: data, // since we are sending over a file/photo, no need to jsonify, since we are sending a multipart/formdata request
-		headers: {
-			// convention for sending jwts
-			Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage and and it to our api request
-			// so the server knows who the request is coming from when the client is trying to make a POST
-		}
-	}).then(responseFromTheServer => {
-		if(responseFromTheServer.ok) return responseFromTheServer.json() // so if everything went well in the response return 
-		//the parsed json to where we called the function
+  const [posts, setPosts] = useState([]); // this will be an array of objects!	
+  const [loading, setLoading] = useState(true)
+  // Wherever you store your state, 
+  // this is where we will define the api calls, 
+  // because when they finish we need to update state
+  // to reflect whatever CRUD operation we just performed
+  async function handleAddPost(postToSendToServer){
+	console.log(postToSendToServer, " formData from addPost form")
 
-		throw new Error('Something went wrong in create Post'); // this will go to the catch block when we call the function in the AddPostPuppyForm
-		// handleSubmit
-	})
-}
+	try {
+		// Since we are sending a photo
+		// we are sending a multipart/formdData request to express
+		// so express needs to have multer setup on this endpoint!
+		const response = await fetch('/api/posts', {
+			method: 'POST',
+			body: postToSendToServer, // < No jsonify because we are sending a photo
+			headers: {
+					// convention for sending jwts, tokenService is imported above
+					Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage 
+					//and and it to our api request
+					// so the server knows who the request is coming from when the client is trying to make a POST
+				}
+		})
+
+		const data = await response.json();
+		//       res.status(201).json({ post }); this value is from express/posts/create controller
+		console.log(data, ' response from post request! This from express')
+		
+	} catch(err){
+		console.log(err.message)
+		console.log('CHECK YOUR SERVER TERMINAL!!!!')
+	}
+
+  }
 
 
 ```
 
 - Things to note here, the header is how we have to send over our token that is being stored in localstorage. We have to do this for every resource besides login and signup, because those are the operations that create the token.  Remember when we send over the token, it goes through our ```app.use(require('./config/auth')); ``` middleware and inside of that module, we check to see if the token exists and is valid, and if it is we assign the decoded tokens value to req.user ```req.user = decoded.user;```
 
-**Where to import the function**
-
 - What we want to do is think about where we want to keep our state for all the Posts that will be rendered in our feed!
 
-- Since we want to be able to pass down all of our posts in the future to our `PostGallery` component, it would make sense to set up our function in our `Feed` component!
+- Since we want to be able to pass down all of our posts in the future to our `PostFeed` component, it would make sense to set up our function in our `Feed` component!
 
 ```js
 import React, { useState } from "react";
 
 import PageHeader from "../../components/Header/Header";
 import AddPost from "../../components/AddPost/AddPost";
-import PostGallery from "../../components/PostGallery/PostGallery";
+import PostFeed from "../../components/PostFeed/PostFeed";
 
 import { Grid } from "semantic-ui-react";
 
-// this says import all the export function calls as postsAPI.functionName
-import * as postsAPI from "../../utils/postApi";
+
 
 // import { create } from '../../utils/postApi'
 
 export default function Feed() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); // this will be an array of objects!	
+  const [loading, setLoading] = useState(true)
+  // Wherever you store your state, 
+  // this is where we will define the api calls, 
+  // because when they finish we need to update state
+  // to reflect whatever CRUD operation we just performed
+  async function handleAddPost(postToSendToServer){
+	console.log(postToSendToServer, " formData from addPost form")
 
-  // This is a great place to store all of the functions that
-  // will make http request to the /posts/api endpoints
+	try {
+		// Since we are sending a photo
+		// we are sending a multipart/formdData request to express
+		// so express needs to have multer setup on this endpoint!
+		const response = await fetch('/api/posts', {
+			method: 'POST',
+			body: postToSendToServer, // < No jsonify because we are sending a photo
+			headers: {
+					// convention for sending jwts, tokenService is imported above
+					Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage 
+					//and and it to our api request
+					// so the server knows who the request is coming from when the client is trying to make a POST
+				}
+		})
 
-  // Why?
-  // cuz we want to update state whenever we change a POST CRUD operations*
-  async function handleAddPost(post) {
-    // post, is coming from the addPostForm component, when we call this function onSubmit props.handleAddPost(formData)
-    try {
-      const response = await postsAPI.create(post); // waiting for the json to be return from the server and parsed by us!
+		const data = await response.json();
+		//       res.status(201).json({ post }); this value is from express/posts/create controller
+		console.log(data, ' response from post request! This from express')
+		setPosts([data.post, ...posts])
+	} catch(err){
+		console.log(err.message)
+		console.log('CHECK YOUR SERVER TERMINAL!!!!')
+	}
 
-      // data is the response from the api, the result of the .then if(res.ok) return res.json() in the create postAPI utils function
-      console.log(response);
-   
-    } catch (err) {
-      // this is the error from the throw block, in the postsAPI.create function
-      console.log(err.message);
-    }
   }
 
   return (
@@ -399,7 +419,7 @@ export default function Feed() {
 
 ```
 
-Here we set up our utility function in `handleAddPost` in the Feed component that will hold our state that contains all the posts for our app!
+Here we set up our utility function in `handleAddPost` in the PostFeed component that will hold our state that contains all the posts for our app!
 
 **Now lets use it!**
 
@@ -526,30 +546,47 @@ const postSchema = new mongoose.Schema({
 
 **Setting are state**
 
-Feed.jsx
+PostFeed.jsx
 
 ```js
 import AddPost from '../../components/AddPostForm/AddPostForm';
 import * as postsAPI from '../../utils/postApi';
 
 export default function Feed({ user,handleLogout}){
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]); // this will be an array of objects!	
+  const [loading, setLoading] = useState(true)
+  // Wherever you store your state, 
+  // this is where we will define the api calls, 
+  // because when they finish we need to update state
+  // to reflect whatever CRUD operation we just performed
+  async function handleAddPost(postToSendToServer){
+	console.log(postToSendToServer, " formData from addPost form")
 
+	try {
+		// Since we are sending a photo
+		// we are sending a multipart/formdData request to express
+		// so express needs to have multer setup on this endpoint!
+		const response = await fetch('/api/posts', {
+			method: 'POST',
+			body: postToSendToServer, // < No jsonify because we are sending a photo
+			headers: {
+					// convention for sending jwts, tokenService is imported above
+					Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage 
+					//and and it to our api request
+					// so the server knows who the request is coming from when the client is trying to make a POST
+				}
+		})
 
-   async function handleAddPost(post) {
-    // post, is coming from the addPostForm component, when we call this function onSubmit props.handleAddPost(formData)
-    try {
-      const response = await postsAPI.create(post); // waiting for the json to be return from the server and parsed by us!
+		const data = await response.json();
+		//       res.status(201).json({ post }); this value is from express/posts/create controller
+		console.log(data, ' response from post request! This from express')
+		setPosts([data.post, ...posts])
+	} catch(err){
+		console.log(err.message)
+		console.log('CHECK YOUR SERVER TERMINAL!!!!')
+	}
 
-      // data is the response from the api, the result of the .then if(res.ok) return res.json() in the create postAPI utils function
-      console.log(response);
-      setPosts([response.data, ...posts]); /// ...posts would keep all the posts in the previous states array
-    } catch (err) {
-      // this is the error from the throw block, in the postsAPI.create function
-      console.log(err.message);
-    }
   }
-
 ```
 
 - Here our actually object is inside of data.post, where is post coming from? Check the controller function!
