@@ -145,7 +145,7 @@ export default PostCard;
 import React, { useState } from "react";
 
 import PageHeader from "../../components/Header/Header";
-import AddPost from "../../components/AddPost/AddPost";
+import AddPostForm from "../../components/AddPostForm/AddPostForm";
 import PostFeed from "../../components/PostFeed/PostFeed";
 
 import { Grid } from "semantic-ui-react";
@@ -162,7 +162,7 @@ export default function PostFeed() {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <AddPost  />
+          <AddPostForm  />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
