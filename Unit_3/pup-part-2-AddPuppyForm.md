@@ -150,7 +150,7 @@ import PostFeed from "../../components/PostFeed/PostFeed";
 
 import { Grid } from "semantic-ui-react";
 
-export default function PostFeed() {
+export default function FeedPage() {
 
 
   return (
@@ -181,7 +181,7 @@ export default function PostFeed() {
 
 - Lets first create our form, It is going to look very similiar to yesterday 
 
-- AddPostFeed
+- AddPostForm
 
 **Challenge**
 
@@ -231,7 +231,7 @@ export default function AddPostForm() {
 import { useState } from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
-export default function AddPostForm(props) {
+export default function AddPostForm({handelAddPost}) {
   // create the state, pay attention to how the inputs are setup!
   const [state, setState] = useState({
     caption: "",
@@ -246,7 +246,8 @@ export default function AddPostForm(props) {
 
   function handleChange(e) {
     setState({
-      caption: e.target.value,
+     ...state,
+     [e.target.name]: e.target.value
     });
   }
 
@@ -256,7 +257,7 @@ export default function AddPostForm(props) {
     const formData = new FormData();
     formData.append("photo", selectedFile);
     formData.append("caption", state.caption);
-    props.handleAddPost(formData); // formData is the data we want to send to the server!
+    handleAddPost(formData); // formData is the data we want to send to the server!
   }
 
   return (
@@ -341,7 +342,7 @@ formData - Since we have to send over a formData to the server we have to create
 
 ```
 
-- Things to note here, the header is how we have to send over our token that is being stored in localstorage. We have to do this for every resource besides login and signup, because those are the operations that create the token.  Remember when we send over the token, it goes through our ```app.use(require('./config/auth')); ``` middleware and inside of that module, we check to see if the token exists and is valid, and if it is we assign the decoded tokens value to req.user ```req.user = decoded.user;```
+- Things to note here, the header is how we have to send over our token that is being stored in localstorage. We have to do this for every resource besides login and signup, because those are the operations that create the token. We are using `tokenService.getToken()` Remember when we send over the token, it goes through our ```app.use(require('./config/auth')); ``` middleware and inside of that module, we check to see if the token exists and is valid, and if it is we assign the decoded tokens value to req.user ```req.user = decoded.user;```
 
 - What we want to do is think about where we want to keep our state for all the Posts that will be rendered in our feed!
 
@@ -357,10 +358,9 @@ import PostFeed from "../../components/PostFeed/PostFeed";
 import { Grid } from "semantic-ui-react";
 
 
+import tokenService from "../../utils/tokenService";
 
-// import { create } from '../../utils/postApi'
-
-export default function Feed() {
+export default function FeedPage() {
   const [posts, setPosts] = useState([]); // this will be an array of objects!	
   const [loading, setLoading] = useState(true)
   // Wherever you store your state, 
