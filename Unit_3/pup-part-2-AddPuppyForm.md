@@ -257,7 +257,7 @@ export default function AddPostForm({handelAddPost}) {
     const formData = new FormData();
     formData.append("photo", selectedFile);
     formData.append("caption", state.caption);
-    handleAddPost(formData); // formData is the data we want to send to the server!
+    
   }
 
   return (
@@ -432,13 +432,13 @@ AddPostForm
     const formData = new FormData()
     formData.append('photo', selectedFile)
     formData.append('caption', state.caption)
-    props.handleAddPost(formData); // calling our function!
+    handleAddPost(formData); // calling our function!
  }
 ```
 
-- How would you confirm that it worked!
+- We passed down `handleAddPost` as a prop and destructered it from the `FeedPage` component. We are calling that in the `handleSubmit` in order to lift our state up. 
 
-- Check the response and check the server!
+- How would you confirm that it worked! Check the response ( `console.log(data, ' response from post request! This from express')` )  and check the server!
 
 **Checking the server**
 
@@ -488,7 +488,7 @@ module.exports = router;
 
 controllers/posts.js
 ```js
-const Post = require("../models/post");
+const PostModel = require("../models/post");
 
 const S3 = require("aws-sdk/clients/s3");
 const s3 = new S3(); // initate the S3 constructor which can talk to aws/s3 our bucket!
@@ -496,7 +496,7 @@ const s3 = new S3(); // initate the S3 constructor which can talk to aws/s3 our 
 const { v4: uuidv4 } = require("uuid");
 // since we are sharing code, when you pull you don't want to have to edit the
 // the bucket name, thats why we're using an environment variable
-const BUCKET_NAME = process.env.AWS_BUCKET_NAME;
+const BUCKET_NAME = process.env.S3_BUCKET;
 
 module.exports = {
   create,
@@ -515,7 +515,7 @@ function create(req, res) {
     if (err) return res.status(400).json({ err: "Check Terminal error with AWS" });
     try {
       // Using our model to create a document in the posts collection in mongodb
-      const post = await Post.create({
+      const post = await PostModel.create({
         caption: req.body.caption,
         user: req.user,
         photoUrl: data.Location, // < this is from aws
@@ -549,10 +549,10 @@ const postSchema = new mongoose.Schema({
 PostFeed.jsx
 
 ```js
-import AddPost from '../../components/AddPostForm/AddPostForm';
-import * as postsAPI from '../../utils/postApi';
+import AddPostForm from '../../components/AddPostForm/AddPostForm';
 
-export default function Feed({ user,handleLogout}){
+
+export default function FeedPage(){
   const [posts, setPosts] = useState([]); // this will be an array of objects!	
   const [loading, setLoading] = useState(true)
   // Wherever you store your state, 
