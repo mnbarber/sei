@@ -51,3 +51,5 @@ Passcode: .K9CFwG?
 Passcode: 5@v!poN3
 26. [Review of Add Post Form (short)](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/vJnWHVYpbC4brJ4J3xoI0LJi-zhvBDYXU65axGmNjp1QrZp0HA8HAaUiKgP4vkyA._JKFnbuwzKOSx0Ys__;!!GgcXpDZ2N9l6uyZJ!n7EDYVomSUwROVM8OUawsRGw9rc8Gn76DArix_FfDla7hmNHzqlrRau5vnp0pQMpBeK7G_V9d7enr-nGwNhBpTHTcUE$)
 Passcode: ?FvI!&3W
+27. [Profile Page](https://generalassembly.zoom.us/rec/share/_WnOOPPpn-mz7ICA7kOLN0kO4Au-r8SIweFOHBs4dAHunDQlDqMozSFpuqFaYXZr.Z62clAS0x_vv7Zxn)
+Passcode: 98%9Y.CM
