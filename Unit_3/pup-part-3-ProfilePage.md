@@ -28,7 +28,7 @@
 
 **Set up your the basic components!**
 
-1. Create the Profile Page.
+1. Create the Profile Page. Remember anything rendered by a route is put in the pages folder. 
 
 pages/ProfilePage/ProfilePage.jsx
 
@@ -181,31 +181,7 @@ async function profile(req, res){
 - So we see here that this endpoint will return both the user's posts and the users information in the same respective properties, so making a call to this endpoint will give us everything we need!
 
 
-**What do we have to do now?**
 
-- You guessed it lets add a function to our `userService` in order to fetch our profile!
-
-```js
-function getProfile(username){
-  return fetch(BASE_URL + username, {
-    headers: {
-      'Authorization': 'Bearer ' + tokenService.getToken()
-    }
-  })
-  .then(res => {
-    if(res.ok) return res.json();
-    throw new Error('Bad Credentials!')
-  })
-}
-
-export default {
-  signup, 
-  getUser,
-  logout,
-  login,
-  getProfile
-};
-```
 
 - We see our function has a parameter called `username` (which whatever the username in the url will be!), and we are sending over our jwt for authentication!
 - now back to the profilePage
@@ -227,35 +203,47 @@ import { useParams } from 'react-router-dom';
 export default function ProfilePage(){
 
     const [posts, setPosts] = useState([])
-    const [user, setUser] = useState({})
+    const [profileUser, setProfileUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     
      const { username } = useParams();
     
+   useEffect(() => {
+      getProfileInfo()
+    }, [username]);
 
 
+    async function getProfileInfo(){
+        try {
+          setLoading(true)
+          const response = await fetch(`/api/users/${username}`, {
+            method: 'GET',
+            headers: {
+              // convention for sending jwts, tokenService is imported above
+              Authorization: "Bearer " + tokenService.getToken() // < this is how we get the token from localstorage 
+              //and and it to our api request
+              // so the server knows who the request is coming from when the client is trying to make a POST
+            }
+          })
+            //.ok property comes from fetch, and it checks the status code, since profile not found
+          // is a 404 the code throws to the fetch block
+          if(!response.ok) throw new Error('Whatever you put in here goes to the catch block')
+          // this is recieving and parsing the json from express
+          const data = await response.json();
+          console.log(data)
+          setLoading(false)
+          setPosts(data.data)
+          setProfileUser(data.user)
+          setError(''); // set error back to blank after successful fetch
 
-    useEffect(() => {
-        async function getProfile() {
-          try {
-            const data = await userService.getProfile(username);
-            console.log(data, " data");
 
-            // data is the response from the controller function /api/users/profile
-            // go to the controller function and look at what is returned
-            // posts and user are the properties on the data object
-            setLoading(() => false);
-            setPosts(() => [...data.posts]);
-            setProfileUser(() => data.user);
-          } catch (err) {
-            console.log(err.message);
-            setError("Profile does not Exist");
-          }
-    }
-    
-        getProfile()
-    }, [])
+        } catch(err){
+          console.log(err.message)
+          setError('Profile Does Not Exist! Check the Terminal!')
+          setLoading(false)
+        }
+      }
     
     
       if (error) {
@@ -283,7 +271,7 @@ export default function ProfilePage(){
               </Grid.Row>
               <Grid.Row>
                   <Grid.Column>
-                      <ProfileBio user={user}/>
+                      <ProfileBio profileUser={profileUser}/>
                   </Grid.Column>
               </Grid.Row>
               <Grid.Row centered>
@@ -317,19 +305,19 @@ import React from 'react';
 import {  Image, Grid, Segment } from 'semantic-ui-react';
 
 
-function ProfileBio({user}) { 
+function ProfileBio({profileUser}) { 
   return (
   <Grid textAlign='center' columns={2}>
     <Grid.Row>
       <Grid.Column>
-        <Image src={`${user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} `} avatar size='small' />
+        <Image src={`${profileUser.photoUrl ? profileUser.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} `} avatar size='small' />
       </Grid.Column>
       <Grid.Column textAlign="left" style={{ maxWidth: 450 }}>
         <Segment vertical>
-           <h3>{user.username}</h3>
+           <h3>{profileUser.username}</h3>
         </Segment>
         <Segment>
-           <span> Bio: {user.bio}</span>
+           <span> Bio: {profileUser.bio}</span>
         </Segment>
           
       </Grid.Column>
