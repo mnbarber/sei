@@ -53,3 +53,5 @@ Passcode: 5@v!poN3
 Passcode: ?FvI!&3W
 27. [Profile Page](https://generalassembly.zoom.us/rec/share/_WnOOPPpn-mz7ICA7kOLN0kO4Au-r8SIweFOHBs4dAHunDQlDqMozSFpuqFaYXZr.Z62clAS0x_vv7Zxn)
 Passcode: 98%9Y.CM
+28. [Only Code walkthrough of create](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/0_OK-1rtgET5TM0sV2u281wFyMK8jReFfZ8umDnwaGt9CoWJ0RU-HU6MtdJLScXJ.LNlEgQPsqGUiyAJn__;!!GgcXpDZ2N9l6uyZJ!ijH1oeapk7YmViHggEces39nBEq1wCzVxrflMmWYI6IYbGPox3PP_8jiP6Rb-2rX3cR44naDDcpGucCmPT2lelTzfmo$)
+Passcode: .aX!8sO0
