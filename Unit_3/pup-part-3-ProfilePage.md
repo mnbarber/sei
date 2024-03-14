@@ -180,9 +180,6 @@ async function profile(req, res){
 
 - So we see here that this endpoint will return both the user's posts and the users information in the same respective properties, so making a call to this endpoint will give us everything we need!
 
-
-
-
 - We see our function has a parameter called `username` (which whatever the username in the url will be!), and we are sending over our jwt for authentication!
 - now back to the profilePage
 
@@ -191,12 +188,13 @@ async function profile(req, res){
 - make the imports at the top 
 
 ```js
-import userService from '../../utils/userService';
+import tokenService from "../../utils/tokenService";
 import { useParams } from 'react-router-dom';
 ```
 
 - We will use the `useParams` hook from react-router-dom in order to figure out what username is in the url!
-
+- We will use the   `tokenService.getToken()` to get our token from local storage. 
+- 
 *ProfilePage Component*
 
 ```js
@@ -285,7 +283,7 @@ export default function ProfilePage(){
 }
 ```
 
-- Here we added a ternary that we flip from `true` to `false` after the page `userService.getProfile(username);` is finished!
+- Here we are flipping the loading state from true to false after the api call is finished
 - Then since our controller function is returning the data for the user's posts and the users information, we need to set them both in our state!
 
 
