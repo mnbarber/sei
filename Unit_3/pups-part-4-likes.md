@@ -157,7 +157,7 @@ import { Card, Icon, Image, Feed } from 'semantic-ui-react'
 
 function PostCard({post, isProfile, addLike, removeLike, user}) { 
 
-  const likedIndex = post.likes.findIndex(like => like.username === user.username);
+  const liked = post.likes.findIndex(like => like.username === user.username);
   const clickHandler = liked > -1 ?  () => removeLike(post.likes[likedIndex]._id) : () => addLike(post._id)
   const likeColor = liked > -1 ? 'red' : 'grey';
 
