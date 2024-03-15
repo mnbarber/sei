@@ -41,15 +41,12 @@ module.exports = router;
 
 Always refer to our [routing guide](https://gist.github.com/jim-clark/17908763db7bd3c403e6)
 
-#### Making our Util functions
+#### Making our fetch function 
 
-Since we are making requests to update a new resource likes make a new util module for the likesService
 
-```
-touch utils/likesApi
-```
+1. Lets decide what our base url is? Remeber we need to look at the server to see where our likes router is mounted, if we look at the server we will find.
 
-Then lets decide what our base url is? Remeber we need to look at the server to see where our likes router is mounted, if we look at the server we will find.
+2. Where to setup the functions? We'll set them up where our `posts` state is because we will want to update our cards with the new information about the like being clicked or deleted by setting our state which will cause our cards to rerender!
 
 ```js
 app.use('/api/posts', require('./routes/api/posts'));
@@ -60,31 +57,55 @@ app.use('/api', require('./routes/api/likes'));
 
 So we see our base url will be ```/api```
 
-Lets go ahead and write out our util functions.
+Lets go ahead and write out our functions in the FeedPage.
 
 ```js
-import tokenService from './tokenService';
+ // CRU(D) (like) likes are embedded in a post
+  async function removeLike(likeId) {
+    try {
+      const responseFromTheServer = await fetch(`/api/likes/${likeId}`, {
+        method: "DELETE",
+        headers: {
+          // convention for sending jwts in a fetch request
+          Authorization: "Bearer " + tokenService.getToken(),
+          // We send the token, so the server knows who is making the
+          // request
+        },
+      });
 
-const BASE_URL = '/api';
-
-export function create(id) {
-    return fetch(`${BASE_URL}/posts/${id}/likes`, {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + tokenService.getToken()
-      }
-    
-    }).then(res => res.json());
+      const data = await responseFromTheServer.json(); // <- taking the json from server
+      // and turning into a regular object
+      getPosts(); // < call getPOsts to get the updated posts from the server, this updates states
+      // so we can see our like
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-export function removeLike(id){
-    return fetch(`${BASE_URL}/likes/${id}`, {
-        method: 'DELETE',
+  // (C)RUD (like) likes are emebedded in a post
+  async function addLike(postId) {
+    try {
+      const responseFromTheServer = await fetch(`/api/posts/${postId}/likes`, {
+        method: "POST",
         headers: {
-            'Authorization': 'Bearer ' + tokenService.getToken()
-          }
-    }).then(res => res.json());
-}
+          // convention for sending jwts in a fetch request
+          Authorization: "Bearer " + tokenService.getToken(),
+          // We send the token, so the server knows who is making the
+          // request
+        },
+      });
+
+      const data = await responseFromTheServer.json(); // <- taking the json from server
+      // and turning into a regular object
+      console.log(data);
+      getPosts(); // < call getPOsts to get the updated posts from the server, this updates states
+      // so we can see our like
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
 ```
 
 - Always sending across our user token! Remember this always us to access req.user in any of our routes thanks to our `app.use(require('./config/auth')); ` middleware!
@@ -106,36 +127,7 @@ What else will we need to know?
 
 1. We'll have to know if the logged in user has clicked on the heart or not so we'll have to pass the user object down from the app all the way to the card, I trust that you can do that, its alot of layers. (Maybe in the future you can check out some [solutions](https://reactjs.org/docs/context.html) to bypass that, but for now we do it without the magic.
 
-2. Where to setup the functions? We'll set them up where our `posts` state is because we will want to update our cards with the new information about the like being clicked or deleted by setting our state which will cause our cards to rerender!
 
-## First the Feed Page!
-
-```js
-import * as likesAPI from '../../utils/likesApi';
-// rest of code 
-
-      async function addLike(postId){
-        try {
-          const data = await likesAPI.create(postId);
-          console.log(data, ' this is from addLike')
-          getPosts()
-        } catch(err){
-          console.log(err)
-        }
-      }
-    
-      async function removeLike(likeId){
-        try {
-          const data = await likesAPI.removeLike(likeId);
-          getPosts();
-        } catch(err){
-          console.log(err)
-        }
-      }
-```
-
-- Here we import our likesAPI service and setup our functions
-- Notice we can just call `getPosts` after we add or remove a like which will fetch the updated documents from our db, and then inside of `getPosts` it will set our state!
 
 **passing the functions as props**
 
@@ -249,24 +241,50 @@ Then we just add those values to our `Icon` componenet!
 
 
 ```js
-    async function addLike(postId){
-        try {
-          const data = await likesAPI.create(postId);
-          console.log(data, ' this is from addLike')
-          getProfile()
-        } catch(err){
-          console.log(err)
-        }
+    async function removeLike(likeId) {
+    try {
+      const responseFromTheServer = await fetch(`/api/likes/${likeId}`, {
+        method: "DELETE",
+        headers: {
+          // convention for sending jwts in a fetch request
+          Authorization: "Bearer " + tokenService.getToken(),
+          // We send the token, so the server knows who is making the
+          // request
+        },
+      });
+
+      const data = await responseFromTheServer.json(); // <- taking the json from server
+      // and turning into a regular object
+      getProfile(); // < call getProfile to get the updated posts from the server, this updates states
+      // so we can see our like
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+    // (C)RUD (like) likes are emebedded in a post
+    async function addLike(postId) {
+      try {
+        const responseFromTheServer = await fetch(`/api/posts/${postId}/likes`, {
+          method: "POST",
+          headers: {
+            // convention for sending jwts in a fetch request
+            Authorization: "Bearer " + tokenService.getToken(),
+            // We send the token, so the server knows who is making the
+            // request
+          },
+        });
+  
+        const data = await responseFromTheServer.json(); // <- taking the json from server
+        // and turning into a regular object
+        console.log(data);
+        getProfile(); // < call getProfile to get the updated posts from the server, this updates states
+        // so we can see our like
+      } catch (err) {
+        console.log(err);
       }
-    
-      async function removeLike(postId){
-        try {
-          const data = await likesAPI.removeLike(postId);
-          getProfile();
-        } catch(err){
-          console.log(err)
-        }
-      }
+    }
 ```
 
 - Thats right we call getProfile, because on this page we need to update this particular users posts, and then we just pass down everything just like before.
