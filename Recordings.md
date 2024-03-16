@@ -55,5 +55,6 @@ Passcode: ?FvI!&3W
 Passcode: 98%9Y.CM
 28. [Only Code walkthrough of create](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/0_OK-1rtgET5TM0sV2u281wFyMK8jReFfZ8umDnwaGt9CoWJ0RU-HU6MtdJLScXJ.LNlEgQPsqGUiyAJn__;!!GgcXpDZ2N9l6uyZJ!ijH1oeapk7YmViHggEces39nBEq1wCzVxrflMmWYI6IYbGPox3PP_8jiP6Rb-2rX3cR44naDDcpGucCmPT2lelTzfmo$)
 Passcode: .aX!8sO0
-29. [Create and Delete Likes](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/FlFrwRUoOazl3MiEoX92bdm3PDQ2B9DHlNWyAFqvNkWDuKrFQayXjonEUMiDV4Pr.QkHJQolEg24aedlC__;!!GgcXpDZ2N9l6uyZJ!hx5PplbExtJDDTAEqsfPozefXD1oRnMSVyppa3d0A6p83vnWEj2ANCuQzAdoVIjBdQXSZrZ5MX9yZWG2lK_Q5-blyW4$)
-29. [use Context walkthrough, making user availiable everywhere!](https://youtu.be/xnKbdxtDjXQ)
+29. [Create and Delete Likes](https://urldefense.com/v3/__https://generalassembly.zoom.us/rec/share/FlFrwRUoOazl3MiEoX92bdm3PDQ2B9DHlNWyAFqvNkWDuKrFQayXjonEUMiDV4Pr.QkHJQolEg24aedlC__;!!GgcXpDZ2N9l6uyZJ!hx5PplbExtJDDTAEqsfPozefXD1oRnMSVyppa3d0A6p83vnWEj2ANCuQzAdoVIjBdQXSZrZ5MX9yZWG2lK_Q5-blyW4$) Passcode: ?V1NfK?8
+29. [use Context walkthrough, making user availiable everywhere!](https://youtu.be/xnKbdxtDjXQ) No passcode needed!
+ 
