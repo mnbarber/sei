@@ -125,7 +125,7 @@ You will have approximately 15 minutes to present your project following these g
 ☐ Your team must **manage team contributions and collaboration** using Git/GitHub team work-flow.  Here are some references:
 
 - [Team Workflow Video](https://www.youtube.com/watch?v=oFYyTZwMyAg)
-- [Cheatsheet in Class Repo](https://git.generalassemb.ly/SEI-CC/sei-9-25/blob/main/Unit_4/project-4/Github-workflow.md)
+- [Cheatsheet in Class Repo](https://git.generalassemb.ly/SEI-CC/sei-1-22-wc/blob/main/Unit_4/project-4/Github-workflow.md)
 - [Understanding the GitHub Flow](https://guides.github.com/introduction/flow/)
 
 ☐ All team members need to have significant contributions to the project via git commits.
@@ -199,7 +199,7 @@ You will have approximately 15 minutes to present your project following these g
 
 ## Project Feedback + Evaluation
 
-- Your instructors will be using the [Project 3 Code Review](./project-3-code-review.pdf) form to determine whether or not the project passes all of the minimum requirements.
+
 - Your instructors will endeavor to deliver your code review ASAP the week following Friday's presentation.
 - If your instructors determine that your project would pass with minor fixes, you will be required to address the minor deficiencies by 9 am the following day. Please be sure to inform your local instructor when the fixes are complete. FYI, "minor fixes" are minor items that can be fixed very quickly, like code formatting, correcting the README, etc.
 - If your instructors determine that the project does not meet the minimum requirements you may request to address the deficiencies identified and resubmit the project. However, be aware that **there is only a single opportunity to resubmit a project or project assessment during the course**.
