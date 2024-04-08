@@ -1,157 +1,214 @@
-<img src="https://i.imgur.com/NQXEQci.png">
-<img = src="https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png"> 
+<img src="https://i.imgur.com/QgojyYY.png" width="400">
 
-# Project #4: Your Capstone Project
+# Project 4<br>Build a Full-stack Django App as a Team
 
-## Overview
+### Overview
 
-**You’ve come a long way, and it's time to show it.** This will be your most advanced project to date.
+You’ve already worked in small groups to accomplish various labs and exercises, but this time **we’re going to challenge you to work in a small team on a project.**
 
-**Before you start working** on the planning for your project, be sure to review your idea with an instructor to ensure that it both:
+You and your teammates together will architect, design, and collaboratively build a full-stack web app.
 
-- **Meets the minimum requirements**, and
-- **Is reasonably scoped**
+With this project you'll be building an exciting full-stack app that uses the **Python**-based **Django Web Framework**.
 
-## Project Requirements
+**This project will push you both technically and collaboratively!**
 
-### Planning Requirements - Due _________
+You'll likely be working as part of a team in the workplace and **this project will provide you with that important team development experience.**
 
-As you've discovered, a project consists of more than just code.
+However, **working on a project as part of a team can be more challenging** due to logistical reasons, differing opinions, etc.
 
-This project requires **planning** organized within a **Trello board** with the following **lists**:
+During this project, **your instructors are going to be evaluating your ability to**:
 
-☐ **Icebox**: Holds user stories that have yet to be moved to the _Current/MVP_ list. All user stories are originally put into the _Icebox_, including both MVP and wish list stories. 
+-  Listen to and respect other opinions
+-  Share and contribute your ideas with the team
+-  Form a consensus and compromise when opinions differ
 
-☐ **Current/MVP**: Holds user stories that must be completed to meet the minimum project requirements (MVP). Once the MVP has been met, additional user stories may be moved to this list from the _Icebox_.
+### In fact, **your ability to work in a team during this project is more important than the project itself**.
 
-☐ **Completed**: Holds completed user stories. 
+---
 
-> Important: User stories need to be formed properly using this template:<br>`As a <role>, I want <feature> so that <reason>`.<br>The _reason_ is optional if it's patently obvious.
+## Planning & Presentation Requirements
 
-☐ **Wireframes**: Sketches of each screens's user interface for the major functionality of the application.
+### Planning -
 
-☐ **Entity-Relationship-Diagram (ERD)**: A diagram of the app's models (one per data entity) and the relationships between them.
+Working in a team is going to require more upfront planning to ensure the team is "on the same page"...
 
-> Please reach out to your instructional team if you have questions regarding user stories, the data model, etc.
+#### Pitch Deck
 
-### Presentation Requirements - __________
+☐ **Pitch your project** to the class with a [pitch deck](https://pitchdeck.improvepresentation.com/what-is-a-pitch-deck) that includes:
 
-You will have 10 minutes to present and demonstrate the following:
+- The application name.
+- Your team members and their roles.
+- The problem you are going to solve with your app.
+- Check out previous decks: [Meal Ticket](https://docs.google.com/presentation/d/1CsBuC-a_AZ1yXJEE-EbptPIdgj1MktiNALyQyhaFfrM/edit#slide=id.p), [Tripio](https://docs.google.com/presentation/d/1WvHoN5MNaRembgcoog5p0GtivVCOZSzvfPyeevzy08g/edit), [ArtWorld](https://docs.google.com/presentation/d/1yGy2Mh3n6IhPxFu4XKnnMtPPi4OGFPpf-Z_TMYw6wQY/edit#slide=id.g7ba109823e_2_7)
 
-1. Introduce your project by paraphrasing its README.
+#### Trello Board
 
-2. Click the link in the README to open the deployed app on Heroku.
-
-3. Demonstrate the application's authentication features by signing up a new user, logging out that user, then logging in with your preferred user.
-
-4. Demonstrate your app's main features.
-
-5. Share/discuss the following code:
-
-	- The "main" Mongoose model
-	- Your "favorite" Express controller method
-	- Your "favorite" React component
-	- The client-side routing
-
-6. Share the experience by answering the following:
-
-	- What was your biggest challenge?
-	- What are your key learnings/takeaways?
-
-Following your presentation, there may be a brief Q & A period and optional instructor feedback.
-
-### Version Control Requirements
-
-☐ The project's source code must be hosted on a personal **GitHub repository**.
-
-☐ The repo is to contain **frequent commits** dated from the beginning of the project through its completion. **Do not** "start over" by replacing the repository with a different one.
-
-### README Requirements
-
-Don't underestimate the value of a well crafted `README.md`.
-
-The `README.md` introduces your project to prospective employers and forms their first impression of your work!
-
-> Note: Do not include project planning (user stories, wireframes or ERDs) in the `README.md`.
-
-Include the following sections within the **`README.md`**:
-
-☐ **App Title:** Contains a description of what the app does and optional background info.
-  
-☐ **Screenshot(s):** A screenshot of your app's landing page and any other screenshots of interest.
-  
-☐ **Technologies Used**: List of the technologies used.
+- A **[Trello](https://trello.com/) board** with:
     
-☐ **Getting Started**: That Includes:
+    ☐ **User Stories**, each moving from left to right in the following 
+      three lists in your board:<br>
+      	- **Ice Box**<br>
+      	- **Current/MVP**<br>
+      	- **Completed**<br>
+      <br>**User Stories** must follow the following template:<br>**_As a \<user role\>, I want \<feature\>, because \<reason\>._**<br>The _reason_ is optional if it's blatantly obvious.
+      <br><br>Note: Prioritize your user stories within the Ice Box with your "wish 
+      list" stories at the bottom.
+    
+    ☐ **Wireframes of the main pages of functionality**, e.g. Landing Page, Posts Index Page, Favorite Posts Page, Add Post Page, etc.
+    
+    ☐ An **ERD** showing the attributes of each entity and the relationships between them. Refer to the Data Modeling lesson for assistance.
+
+### Presentations 
+
+**Your entire team must participate in the presentation of the project.**
+
+You will have approximately 15 minutes to present your project following these guidelines:
+
+1. **Introduce the Project:**
+
+	☐ Intro your project by paraphrasing the README.
+	
+2. **Demonstrate the Project:**
+
+	☐ Launch the project by clicking the link in the README.
+	
+	☐ Sign up a new user, then immediately log out.
+	
+	☐ Log in with your preferred user and demonstrate the features of the app.
+	
+	☐ Be sure to demo the qualifying CRUD data operations.
+	
+3. **Show/discuss your code:**
+
+	☐ Show the "main" Django model.
+	
+	☐ Show the code for the main model's view.
+	
+	☐ Show your favorite Django template.
+
+4. **Share the experience:**
+
+	☐ What was your biggest challenge? (besides Team Git Workflow)
+	
+	☐ What are your key learnings/takeaways?
+	
+5. **Q & A + Feedback**
+
+---
+
+## Technical Requirements
+
+### Your App Must:
+
+☐ Be a full-stack **Django** application.
+
+☐ Have **at least one data entity** (Model) in addition to the built-in User model.  
+
+☐ Connect to and perform data operations on a **PostreSQL** database (the default SQLLite3 database is not acceptable).
+
+☐ Have **at least 3 of the 4 CRUD data operations** across any combination of the app's models (excluding the User model). For example, creating/reading posts and creating/deleting comments qualifies as 3 of 4 CRUD operations. 
+
+☐ **Authenticate users using Django's built-in authentication**.
+
+☐ **Implement authorization by restricting access to the Creation, Updating & Deletion of resources** using the `login_required` decorator in the case of view functions; or, in the case of class-based views, inheriting from the `LoginRequiredMixin`.
+
+☐ Be **deployed online** using **Heroku**. Presentations must use the deployed application.
+
+#### The app may optionally:
+
+☐ Consume data from a third-party API.
+
+☐ Upload images to AWS S3.
+
+### Other Requirements:
+
+☐ Your team must **manage team contributions and collaboration** using Git/GitHub team work-flow.  Here are some references:
+
+- [Team Workflow Video](https://www.youtube.com/watch?v=oFYyTZwMyAg)
+- [Cheatsheet in Class Repo](https://git.generalassemb.ly/SEI-CC/sei-9-25/blob/main/Unit_4/project-4/Github-workflow.md)
+- [Understanding the GitHub Flow](https://guides.github.com/introduction/flow/)
+
+☐ All team members need to have significant contributions to the project via git commits.
+
+##### A ``README.md`` file with these sections:
+
+  ☐ **App Title:** Contains a description of what the app does and optional background info.
+  
+  ☐ **Screenshot(s):** A screenshot of your app's landing page and any other screenshots of interest.
+  
+  ☐ **Technologies Used**: List of the technologies used.
+    
+  ☐ **Getting Started**: That Includes:
   	
 - A link to the **deployed app** (Heroku)
 - A link to the **Trello board** used for the project's planning that includes user stories, wireframes & an ERD.
+- A link to the **pitch-deck**.
   
 ☐ **Next Steps**: Planned future enhancements (icebox items).
   
-### Technical Requirements
-
-☐ A **working** full-stack, single-page application hosted on Heroku.
-
-☐ Incorporate the technologies of the **MERN-stack**:
-
-- MongoDB/Mongoose
-- Express
-- React
-- Node
-
-☐ **Have a well-styled interactive front-end**.
-
-☐ Communicates with the **Express** backend via AJAX.
-
-☐ Implement token-based **authentication**.  Including the ability of a user to sign-up, log in & log out.
-
-☐ Implement **authorization** by restricting CUD data functionality to authenticated users. Also, navigation should respond to the login status of the user.
-
-☐ **Have a well-scoped feature-set**. Full-CRUD data operations are not required if one or more other features are included, for example:
-	
-- Consume data from a third-party API.
-- Implement additional functionality if the user is an admin.
-- Implementation of a highly dynamic UI or data visualization.
-- Other, instructor approved, complexity/features.
-
-## Self-sufficiency / Project Assistance
-
-- At this stage of SEI, being able to find the the answers to development issues is of paramount importance. 
-
-- Use all resources available to solve the issue on your own before seeking assistance.
-
-- If you do seek assistance in Slack, use the support channel and explain the issue as clearly and detailed as you can, include screenshots when possible, and be prepared to explain what you've done to solve the issue on your own.
-
-## Suggestions to Get Started
-
-- Don’t get too caught up in too many awesome features – simple is better. Favor fewer features that look/feel impressive over numerous clunky/sloppy features.
-
-- Because it takes longer to code user interfaces using React than with EJS & DTL, be sure to prioritize user stories to meet the MVP and ice box the others.
-
-- Begin by cloning the `mern-infrastructure` repo, create a new repo on your **personal** GitHub account, change the `origin` remote to that of the new repo with `git remote set-url origin <new_remote_url>`.
-
-- Update the project name in the package.json file and make other name changes, e.g., update the `<title>` in index.html, etc.
-
-- Implement the "As a visitor, when I browse to the app, I want..." user story first.
-
-- Follow the steps we've done in class to implement features, beginning with the user's interaction and code the flow from client -> server -> client. 
-
-- Read the docs for whatever technologies / frameworks / API’s you use.
-
-## Best Practices
-
-- Make AJAX calls from "API" modules, not components. Export application/business logic from "service" modules.
-
-- **Be consistent** with your code style.
-
-- **Clearly name variables and functions** - remember, variables are usually named as **nouns** and functions as **verbs**.
-
-- **Write well-formatted JS & CSS.** Properly formatting your code makes it more readable. Improperly formatted code infers sloppiness.
-
-- **Comment your code where it makes sense to do so**. Most code is self-documenting (don't comment the obvious), however, use comments to explain complicated code.
-## Project Feedback + Evaluation
-
-- Your instructors will be using the [Project 4 Code Review](/Unit_4/project-4/project-4-code-review.pdf) form to determine whether or not the project passes all of the minimum requirements.
+  > Note: Don't underestimate the value of a well crafted `README.md`. The `README.md` introduces your project to prospective employers and forms their first impression of your work!
 
 ---
+
+## Suggestions for Success
+
+1.  **Identify roles** on the team, which may be:
+
+    - **Scrum Master**: the leader of the Agile processes (user stories, stand-ups, etc.) and manager of Trello.
+    - **GitHub Manager**: the primary person for managing the repo and GitHub  team workflow (merging pull requests, etc.).
+    - **Documenter**: the person in charge of the README, etc.
+    - **Designer**: the person in charge of UI design/layout and styling.
+    - **Database manager**: this person will be in charge of creating and managing the models and their relationships.
+    - **API Manager**: the person in charge of researching, registering with, etc. APIs.
+
+    You *don't have to formally fulfill any of the above roles!* They are only listed to provide ideas/guidance.
+
+2. Because your app's functionality & CRUD revolves around the logged in user, **implement authentication and basic navigation first!**
+
+3. **Remember to keep things small and focus on the MVP** – feature creep can doom a project!
+
+4.  Read the docs for whatever technologies / frameworks / API’s you use. 
+
+5.  **Be consistent with your code style.** You have multiple developers in your team writing code, but you only have one app per team. Make sure it looks like a unified effort in regards to formatting, etc.  For example, consistent vertical whitespace between functions.
+
+6. Do your best to have only one dev working on a certain file between commits.  This will avoid merge conflicts. This is another reason to separate responsibilities between team members when possible.
+
+7. **Commit early, commit often.**
+
+8. **Pair programming** can be a great way for team members to share knowledge and contribute to the project.
+
+9. Consider following a [Mob Programming](https://en.wikipedia.org/wiki/Mob_programming) approach where the team is always developing together on a single computer.  Read [this post](http://underthehood.meltwater.com/blog/2016/06/01/mob-programming/) for more information.
+
+---
+
+## Potential Project Ideas
+
+- If you're having a hard-time coming up with an idea, be sure to research potential third-party APIs.
+- For this project, we want you to work with your team to build a creative product or one that improves on an existing app.
+- Once an idea is agreed upon, start by asking "Why would I want to use this app?"
+
+---
+
+## Obtaining Assistance from an Instructor
+
+- Although your kind instructors will be available to assist during project time, the amount of assistance you require is expected to be minimal due to the fact that you will be collaborating as a team regularly. 
+
+- **All requests for assistance should be slacked to the class support channel, not individual instructors**.  This approach will provide the best and quickest response for your team, as well as be helpful to other teams that may be faced with the same issue.
+
+---
+
+## Project Feedback + Evaluation
+
+- Your instructors will be using the [Project 3 Code Review](./project-3-code-review.pdf) form to determine whether or not the project passes all of the minimum requirements.
+- Your instructors will endeavor to deliver your code review ASAP the week following Friday's presentation.
+- If your instructors determine that your project would pass with minor fixes, you will be required to address the minor deficiencies by 9 am the following day. Please be sure to inform your local instructor when the fixes are complete. FYI, "minor fixes" are minor items that can be fixed very quickly, like code formatting, correcting the README, etc.
+- If your instructors determine that the project does not meet the minimum requirements you may request to address the deficiencies identified and resubmit the project. However, be aware that **there is only a single opportunity to resubmit a project or project assessment during the course**.
+- Immediately after your presentation, your instructor and/or outcomes may provide you with feedback that will benefit your project and perhaps the projects of other students as well.
+- If there is a specific section of code that you would like an instructor to provide additional feedback, please ask!
+
+--- 
+
+
+
+
+
